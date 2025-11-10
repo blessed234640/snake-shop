@@ -2,24 +2,42 @@
 {% load static %}
 
 {% block title %}
-  {{ product.name }}
+  {{ product.name }} - Snake Paradise
 {% endblock %}
+
 {% block content %}
   <div class="product-detail">
-    <img src="{% if product.image %}{{ product.image.url }}{% else %}
-    {% static "img/no_image.png" %}{% endif %}">
-    <h1>{{ product.name }}</h1>
-    <h2>
-      <a href="{{ product.category.get_absolute_url }}">
-        {{ product.category }}
-      </a>
-    </h2>
-    <p class="price">${{ product.price }}</p>
-    <form action="{% url "cart:cart_add" product.id %}" method="post">
-      {{ cart_product_form }}
-      {% csrf_token %}
-      <input type="submit" value="Add to cart">
-    </form>
-    {{ product.description|linebreaks }}
+    <div class="product-image">
+      <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'shop/img/no_image.png' %}{% endif %}"
+           alt="{{ product.name }}">
+    </div>
+
+    <div class="product-info">
+      <h1>{{ product.name }}</h1>
+      <h2 style="color: var(--text-secondary); margin: 1rem 0;">
+        📁 Категория:
+        <a href="{{ product.category.get_absolute_url }}" style="color: var(--accent-primary);">
+          {{ product.category }}
+        </a>
+      </h2>
+
+      <div class="price">${{ product.price }}</div>
+
+      <!-- Форма с исправленными отступами -->
+      <form action="{% url 'cart:cart_add' product.id %}" method="post" style="margin: 2.5rem 0;">
+        <div style="margin-bottom: 1.5rem;"> <!-- Добавляем отступ между счетчиком и кнопкой -->
+          {{ cart_product_form }}
+        </div>
+        {% csrf_token %}
+        <input type="submit" value="🛒 Добавить в корзину" class="button">
+      </form>
+
+      <div class="product-description">
+        <h3 style="color: var(--accent-primary); margin-bottom: 1rem;">📝 Описание</h3>
+        <div style="color: var(--text-secondary); line-height: 1.8;">
+          {{ product.description|linebreaks }}
+        </div>
+      </div>
+    </div>
   </div>
 {% endblock %}

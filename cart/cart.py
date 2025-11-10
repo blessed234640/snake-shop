@@ -40,17 +40,19 @@ class Cart:
     def __iter__(
         self,
     ):  # прокрутитьь товарные позиции корзины в цикле и получить товары из бдшки
-        product_ids = (
-            self.cart.keys()
-        )  # получить обьекты product И добавить их в корзину
+        product_ids = self.cart.keys()
         products = Product.objects.filter(id__in=product_ids)
         cart = self.cart.copy()
+
+        # ИСПРАВЛЕНИЕ: вынести создание объектов product из внутреннего цикла
         for product in products:
             cart[str(product.id)]["product"] = product
-            for item in cart.values():
-                item["price"] = Decimal(item["price"])
-                item["total_price"] = item["price"] * item["quantity"]
-                yield item
+
+        # ИСПРАВЛЕНИЕ: убрать вложенный цикл for product in products
+        for item in cart.values():
+            item["price"] = Decimal(item["price"])
+            item["total_price"] = item["price"] * item["quantity"]
+            yield item
 
     def __len__(self):  # подсчитать все товарные позиции в корзине
         return sum(item["quantity"] for item in self.cart.values())

@@ -1,33 +1,49 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="ru">
+<head>
     <meta charset="utf-8" />
-    <title>{% block title %}My shop{% endblock %}</title>
-    <link href="{% static "css/base.css" %}" rel="stylesheet">
-  </head>
-  <body>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Snake Paradise - Премиум змеи{% endblock %}</title>
+    <link href="{% static 'shop/css/base.css' %}" rel="stylesheet">
+</head>
+<body>
     <div id="header">
-      <a href="/" class="logo">My shop</a>
+        <div style="max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+            <a href="/" class="logo">🐍 Snake Paradise</a>
+
+            <!-- Корзина перемещена в правый верхний угол -->
+            <div class="cart-header">
+                {% with total_items=cart|length %}
+                    {% if total_items > 0 %}
+                        🛒 Корзина:
+                        <a href="{% url 'cart:cart_detail' %}">
+                            {{ total_items }} товар{{ total_items|pluralize:"а,ов" }},
+                            ${{ cart.get_total_price }}
+                        </a>
+                    {% elif not order %}
+                        🛒 Корзина пуста
+                    {% endif %}
+                {% endwith %}
+            </div>
+        </div>
     </div>
-    <div id="subheader">
-      <div class="cart">
-        {% with total_items=cart|length %}
-          {% if total_items > 0 %}
-            Your cart:
-            <a href="{% url "cart:cart_detail" %}">
-              {{ total_items }} item{{ total_items|pluralize }},
-              ${{ cart.get_total_price }}
-            </a>
-          {% elif not order %}
-            Your cart is empty.
-          {% endif %}
-        {% endwith %}
-      </div>
-    </div>
+
+    <!-- Убираем старую подшапку с корзиной -->
+    <div id="subheader" style="display: none;"></div>
+
     <div id="content">
-      {% block content %}
-      {% endblock %}
+        {% block content %}
+        {% endblock %}
     </div>
-  </body>
+
+    <footer style="background: var(--bg-header); color: var(--text-secondary); text-align: center; padding: 3rem 0 2rem; margin-top: 4rem; border-top: 1px solid var(--border-color);">
+        <div style="max-width: 1400px; margin: 0 auto;">
+            <p style="margin-bottom: 1rem;">&copy; 2024 Snake Paradise. Премиум рептилии для энтузиастов и коллекционеров.</p>
+            <p style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color); font-size: 0.9rem;">
+                Безопасная доставка • Экспертный уход • Гарантия качества
+            </p>
+        </div>
+    </footer>
+</body>
 </html>
