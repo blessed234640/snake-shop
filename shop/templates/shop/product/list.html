@@ -58,7 +58,7 @@
                    alt="{{ product.name }}">
               <h3 class="product-name">{{ product.name }}</h3>
             </a>
-            <div class="price">${{ product.price }}</div>
+            <div class="price">₽{{ product.price }}</div>
             <form action="{% url 'cart:cart_add' product.id %}" method="post">
               {{ cart_product_form }}
               {% csrf_token %}

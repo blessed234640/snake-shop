@@ -21,7 +21,7 @@
         </a>
       </h2>
 
-      <div class="price">${{ product.price }}</div>
+      <div class="price">₽{{ product.price }}</div>
 
       <!-- Форма с исправленными отступами -->
       <form action="{% url 'cart:cart_add' product.id %}" method="post" style="margin: 2.5rem 0;">
