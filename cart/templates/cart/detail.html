@@ -1,86 +1,162 @@
-{% extends "shop/base.html" %}
-{% load static %}
-
-{% block title %}
-  Корзина покупок - Snake Paradise
-{% endblock %}
-
-{% block content %}
-  <div class="cart-container">
+{% extends "shop/base.html" %} {% load static %} {% block title %} Корзина
+покупок - Snake Paradise {% endblock %} {% block content %}
+<div class="cart-container">
     <h1>🛒 Корзина покупок</h1>
 
     {% if cart %}
-      <div class="cart">
+    <div class="cart">
         <table>
-          <thead>
-            <tr>
-              <th>Изображение</th>
-              <th>Товар</th>
-              <th>Количество</th>
-              <th>Удалить</th>
-              <th>Цена за шт.</th>
-              <th>Стоимость</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for item in cart %}
-              {% with product=item.product %}
+            <thead>
                 <tr>
-                  <td>
-                    <a href="{{ product.get_absolute_url }}">
-                      <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'shop/img/no_image.png' %}{% endif %}"
-                           alt="{{ product.name }}">
-                    </a>
-                  </td>
-                  <td>
-                    <a href="{{ product.get_absolute_url }}" style="color: var(--text-primary); font-weight: 500;">
-                      {{ product.name }}
-                    </a>
-                  </td>
-                  <td>
-                    <form action="{% url 'cart:cart_add' product.id %}" method="post" class="quantity-form">
-                      {{ item.update_quantity_form.quantity }}
-                      {{ item.update_quantity_form.override }}
-                      <input type="submit" value="Обновить" class="button light" style="padding: 8px 16px;">
-                      {% csrf_token %}
-                    </form>
-                  </td>
-                  <td>
-                    <form action="{% url 'cart:cart_remove' product.id %}" method="post">
-                      <input type="submit" value="🗑 Удалить" class="button" style="background: #dc3545; padding: 8px 16px;">
-                      {% csrf_token %}
-                    </form>
-                  </td>
-                  <td class="num">${{ item.price }}</td>
-                  <td class="num">${{ item.total_price }}</td>
+                    <th>Изображение</th>
+                    <th>Товар</th>
+                    <th>Количество</th>
+                    <th>Удалить</th>
+                    <th>Цена за шт.</th>
+                    <th>Стоимость</th>
                 </tr>
-              {% endwith %}
-            {% endfor %}
-            <tr class="total">
-              <td colspan="5"><strong>Итого</strong></td>
-              <td class="num"><strong>${{ cart.get_total_price }}</strong></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody>
+                {% for item in cart %} {% with product=item.product %}
+                <tr>
+                    <td>
+                        <a href="{{ product.get_absolute_url }}">
+                            <img
+                                src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'shop/img/no_image.png' %}{% endif %}"
+                                alt="{{ product.name }}"
+                            />
+                        </a>
+                    </td>
+                    <td>
+                        <a
+                            href="{{ product.get_absolute_url }}"
+                            style="color: var(--text-primary); font-weight: 500"
+                        >
+                            {{ product.name }}
+                        </a>
+                    </td>
+                    <td>
+                        <form
+                            action="{% url 'cart:cart_add' product.id %}"
+                            method="post"
+                            class="quantity-form"
+                        >
+                            {{ item.update_quantity_form.quantity }}
+                            <input
+                                type="submit"
+                                value="Обновить"
+                                class="button light"
+                                style="padding: 8px 16px"
+                            />
+                            {% csrf_token %}
+                        </form>
+                    </td>
+                    <td>
+                        <form
+                            action="{% url 'cart:cart_remove' product.id %}"
+                            method="post"
+                        >
+                            <input
+                                type="submit"
+                                value="🗑 Удалить"
+                                class="button"
+                                style="background: #dc3545; padding: 8px 16px"
+                            />
+                            {% csrf_token %}
+                        </form>
+                    </td>
+                    <td class="num">${{ item.price }}</td>
+                    <td class="num">${{ item.total_price }}</td>
+                </tr>
+                {% endwith %} {% endfor %} {% if cart.coupon %}
+                <tr class="subtotal">
+                    <td>Промежуточный итог</td>
+                    <td colspan="4"></td>
+                    <td class="num">
+                        ${{ cart.get_total_price|floatformat:2 }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Купон"{{cart.coupon.code}}"(скидка{{cart.coupon.discount}}%)
+                    </td>
+                    <td colspan="4"></td>
+                    <td class="num neg">
+                        - ${{ cart.get_discount|floatformat:2 }}
+                    </td>
+                </tr>
+                {% endif %}
 
-      <!-- Исправленные кнопки -->
-      <div class="cart-actions">
+                <tr class="total">
+                    <td colspan="5"><strong>Итого</strong></td>
+                    <td class="num">
+                        <strong
+                            >${{cart.get_total_price_after_discount|floatformat:2}}</strong
+                        >
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Блок с купоном -->
+    <div
+        class="coupon-section"
+        style="
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: var(--bg-card);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-color);
+        "
+    >
+        <h3 style="color: var(--accent-primary); margin-bottom: 1rem">
+            Применить купон:
+        </h3>
+        <form
+            action="{% url 'coupons:apply' %}"
+            method="post"
+            style="display: flex; gap: 1rem; align-items: flex-end"
+        >
+            {{ coupon_apply_form }}
+            <input
+                type="submit"
+                value="Применить"
+                class="button light"
+                style="padding: 10px 20px"
+            />
+            {% csrf_token %}
+        </form>
+    </div>
+    <!-- Исправленные кнопки -->
+    <div class="cart-actions">
         <a href="{% url 'shop:product_list' %}" class="button light">
-          ← Продолжить покупки
+            ← Продолжить покупки
         </a>
         <a href="{% url 'orders:order_create' %}" class="button">
-          🐍 Оформить заказ →
+            🐍 Оформить заказ →
         </a>
-      </div>
+    </div>
     {% else %}
-      <div style="text-align: center; padding: 3rem; background: var(--bg-card); border-radius: var(--border-radius); border: 1px solid var(--border-color);">
-        <h2 style="color: var(--text-secondary); margin-bottom: 1rem;">Ваша корзина пуста</h2>
-        <p style="color: var(--text-secondary); margin-bottom: 2rem;">Откройте для себя нашу удивительную коллекцию змей!</p>
+    <div
+        style="
+            text-align: center;
+            padding: 3rem;
+            background: var(--bg-card);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-color);
+        "
+    >
+        <h2 style="color: var(--text-secondary); margin-bottom: 1rem">
+            Ваша корзина пуста
+        </h2>
+        <p style="color: var(--text-secondary); margin-bottom: 2rem">
+            Откройте для себя нашу удивительную коллекцию змей!
+        </p>
         <a href="{% url 'shop:product_list' %}" class="button">
-          Смотреть каталог
+            Смотреть каталог
         </a>
-      </div>
+    </div>
     {% endif %}
-  </div>
+</div>
 {% endblock %}
