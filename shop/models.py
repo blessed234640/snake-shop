@@ -47,3 +47,26 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return reverse("shop:product_detail", args=[self.id, self.slug])
+
+
+class ProductImage(models.Model):
+    product = models.ForeignKey(
+        Product, related_name="images", on_delete=models.CASCADE
+    )
+    image = models.ImageField(
+        upload_to="products/%Y/%m/%d", verbose_name="Дополнительное фото"
+    )
+    order = models.IntegerField(
+        default=0,
+        verbose_name="Порядок",
+        help_text="Чем меньше число, тем выше в списке",
+    )
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["order", "created"]
+        verbose_name = "изображение товара"
+        verbose_name_plural = "изображения товаров"
+
+    def __str__(self):
+        return f"Изображение для {self.product.name}"
