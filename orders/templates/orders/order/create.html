@@ -1,79 +1,173 @@
-{% extends "shop/base.html" %}
-
-{% block title %}
-  Оформление заказа - Snake Paradise
-{% endblock %}
-
-{% block content %}
-  <div class="checkout-container">
+{% extends "shop/base.html" %} {% block title %} Оформление заказа - Snake
+Paradise {% endblock %} {% block content %}
+<div class="checkout-container">
     <h1>📋 Оформление заказа</h1>
 
-    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 3rem; margin-top: 2rem;">
-      <div>
-        <h2 style="color: var(--accent-primary); margin-bottom: 1.5rem;">Данные для доставки</h2>
-        <form method="post" style="background: var(--bg-card); padding: 2rem; border-radius: var(--border-radius); border: 1px solid var(--border-color);">
-          {% csrf_token %}
+    <div
+        style="
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+        "
+    >
+        <div>
+            <h2 style="color: var(--accent-primary); margin-bottom: 1.5rem">
+                Данные для доставки
+            </h2>
+            <form
+                method="post"
+                style="
+                    background: var(--bg-card);
+                    padding: 2rem;
+                    border-radius: var(--border-radius);
+                    border: 1px solid var(--border-color);
+                "
+            >
+                {% csrf_token %}
 
-          <div style="display: grid; gap: 1.5rem;">
-            {% for field in form %}
-              <div style="margin-bottom: 1.5rem;">
-                <label for="{{ field.id_for_label }}" style="display: block; margin-bottom: 0.5rem; font-weight: 500; color: var(--text-primary);">
-                  {{ field.label }}
-                  {% if field.field.required %}<span style="color: #dc3545;">*</span>{% endif %}
-                </label>
-                {{ field }}
-                {% if field.errors %}
-                  <div style="color: #dc3545; font-size: 0.9rem; margin-top: 0.5rem;">
-                    {% for error in field.errors %}
-                      ⚠️ {{ error }}
+                <div style="display: grid; gap: 1.5rem">
+                    {% for field in form %}
+                    <div style="margin-bottom: 1.5rem">
+                        <label
+                            for="{{ field.id_for_label }}"
+                            style="
+                                display: block;
+                                margin-bottom: 0.5rem;
+                                font-weight: 500;
+                                color: var(--text-primary);
+                            "
+                        >
+                            {{ field.label }} {% if field.field.required %}<span
+                                style="color: #dc3545"
+                                >*</span
+                            >{% endif %}
+                        </label>
+                        {{ field }} {% if field.errors %}
+                        <div
+                            style="
+                                color: #dc3545;
+                                font-size: 0.9rem;
+                                margin-top: 0.5rem;
+                            "
+                        >
+                            {% for error in field.errors %}⚠️ {{ error }} {%endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
                     {% endfor %}
-                  </div>
-                {% endif %}
-              </div>
-            {% endfor %}
-          </div>
-
-          <div style="display: flex; gap: 1rem; justify-content: space-between; margin-top: 2rem;">
-            <a href="{% url 'cart:cart_detail' %}" class="button light">
-              ← Назад в корзину
-            </a>
-            <input type="submit" value="🐍 Подтвердить заказ →" class="button">
-          </div>
-        </form>
-      </div>
-
-      <div>
-        <div style="background: var(--bg-card); padding: 2rem; border-radius: var(--border-radius); border: 1px solid var(--border-color); margin-bottom: 2rem;">
-          <h3 style="color: var(--accent-primary); margin-bottom: 1rem;">📦 Ваш заказ</h3>
-          <div style="margin: 1.5rem 0;">
-            {% for item in cart %}
-              <div style="display: flex; justify-content: space-between; padding: 0.8rem 0; border-bottom: 1px solid var(--border-color);">
-                <div>
-                  <span style="color: var(--text-secondary);">{{ item.quantity }}x</span>
-                  <span style="margin-left: 0.5rem;">{{ item.product.name }}</span>
                 </div>
-                <span style="font-weight: 600;">${{ item.total_price }}</span>
-              </div>
-            {% endfor %}
-          </div>
-          <div style="border-top: 2px solid var(--accent-primary); padding-top: 1rem; text-align: right; font-size: 1.2rem;">
-            <strong>Итого: ${{ cart.get_total_price }}</strong>
-          </div>
+
+                <div
+                    style="
+                        display: flex;
+                        gap: 1rem;
+                        justify-content: space-between;
+                        margin-top: 2rem;
+                    "
+                >
+                    <a href="{% url 'cart:cart_detail' %}" class="button light">
+                        ← Назад в корзину
+                    </a>
+                    <input
+                        type="submit"
+                        value="🐍 Подтвердить заказ →"
+                        class="button"
+                    />
+                </div>
+            </form>
         </div>
 
-        <div style="background: var(--bg-card); padding: 1.5rem; border-radius: var(--border-radius); border: 1px solid var(--border-color);">
-          <h4 style="color: var(--accent-primary); margin-bottom: 1rem;">🚚 Доставка</h4>
-          <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">
-            Все змеи доставляются специализированными перевозчиками с гарантией живой доставки.
-          </p>
-          <ul style="list-style: none; color: var(--text-secondary);">
-            <li style="padding: 0.3rem 0;">✓ Терморегулируемая упаковка</li>
-            <li style="padding: 0.3rem 0;">✓ Экспресс-доставка на следующий день</li>
-            <li style="padding: 0.3rem 0;">✓ Гарантия живой доставки</li>
-            <li style="padding: 0.3rem 0;">✓ Ветеринарная справка включена</li>
-          </ul>
+        <div>
+            <div
+                style="
+                    background: var(--bg-card);
+                    padding: 2rem;
+                    border-radius: var(--border-radius);
+                    border: 1px solid var(--border-color);
+                    margin-bottom: 2rem;
+                "
+            >
+                <h3 style="color: var(--accent-primary); margin-bottom: 1rem">
+                    📦 Ваш заказ
+                </h3>
+                <div style="margin: 1.5rem 0">
+                    {% for item in cart %}
+                    <div
+                        style="
+                            display: flex;
+                            justify-content: space-between;
+                            padding: 0.8rem 0;
+                            border-bottom: 1px solid var(--border-color);
+                        "
+                    >
+                        <div>
+                            <span style="color: var(--text-secondary)"
+                                >{{ item.quantity }}x</span
+                            >
+                            <span style="margin-left: 0.5rem"
+                                >{{ item.product.name }}</span
+                            >
+                        </div>
+                        <span style="font-weight: 600"
+                            >₽{{ item.total_price }}</span
+                        >
+                    </div>
+                    {% endfor %}
+                    {% if cart.coupon %}
+                        <li>
+                        "{{ cart.coupon.code }}" ({{ cart.coupon.discount }}% off)
+                        <span class="neg">- ₽{{ cart.get_discount|floatformat:2 }}</span>
+                        </li>
+                    {% endif %}
+                </div>
+                <div
+                    style="
+                        border-top: 2px solid var(--accent-primary);
+                        padding-top: 1rem;
+                        text-align: right;
+                        font-size: 1.2rem;
+                    "
+                >
+                    <strong>Итого: ₽{{ cart.get_total_price_after_discount|floatformat:2 }}</strong>
+                </div>
+            </div>
+
+            <div
+                style="
+                    background: var(--bg-card);
+                    padding: 1.5rem;
+                    border-radius: var(--border-radius);
+                    border: 1px solid var(--border-color);
+                "
+            >
+                <h4 style="color: var(--accent-primary); margin-bottom: 1rem">
+                    🚚 Доставка
+                </h4>
+                <p
+                    style="
+                        color: var(--text-secondary);
+                        font-size: 0.9rem;
+                        margin-bottom: 1rem;
+                    "
+                >
+                    Все змеи доставляются специализированными перевозчиками с
+                    гарантией живой доставки.
+                </p>
+                <ul style="list-style: none; color: var(--text-secondary)">
+                    <li style="padding: 0.3rem 0">
+                        ✓ Терморегулируемая упаковка
+                    </li>
+                    <li style="padding: 0.3rem 0">
+                        ✓ Экспресс-доставка на следующий день
+                    </li>
+                    <li style="padding: 0.3rem 0">✓ Гарантия живой доставки</li>
+                    <li style="padding: 0.3rem 0">
+                        ✓ Ветеринарная справка включена
+                    </li>
+                </ul>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+</div>
 {% endblock %}
