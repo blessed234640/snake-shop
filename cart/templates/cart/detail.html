@@ -65,15 +65,15 @@
                             {% csrf_token %}
                         </form>
                     </td>
-                    <td class="num">${{ item.price }}</td>
-                    <td class="num">${{ item.total_price }}</td>
+                    <td class="num">₽{{ item.price }}</td>
+                    <td class="num">₽{{ item.total_price }}</td>
                 </tr>
                 {% endwith %} {% endfor %} {% if cart.coupon %}
                 <tr class="subtotal">
                     <td>Промежуточный итог</td>
                     <td colspan="4"></td>
                     <td class="num">
-                        ${{ cart.get_total_price|floatformat:2 }}
+                        ₽{{ cart.get_total_price|floatformat:2 }}
                     </td>
                 </tr>
                 <tr>
@@ -82,7 +82,7 @@
                     </td>
                     <td colspan="4"></td>
                     <td class="num neg">
-                        - ${{ cart.get_discount|floatformat:2 }}
+                        - ₽{{ cart.get_discount|floatformat:2 }}
                     </td>
                 </tr>
                 {% endif %}
@@ -91,7 +91,7 @@
                     <td colspan="5"><strong>Итого</strong></td>
                     <td class="num">
                         <strong
-                            >${{cart.get_total_price_after_discount|floatformat:2}}</strong
+                            >₽{{cart.get_total_price_after_discount|floatformat:2}}</strong
                         >
                     </td>
                 </tr>
