@@ -3,6 +3,8 @@ from django.conf import settings
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from orders.models import Order
+from shop.models import Product
+from shop.recommender import Recommender
 
 from .tasks import payment_completed
 
@@ -32,10 +34,18 @@ def stripe_webhook(request):
                 return HttpResponse(status=404)
             # пометить заказ как оплаченный
             order.paid = True
+
             # сохранить ID платежа stripe
             order.stripe_id = session.payment_intent
+            order.save()
+
+            # сохранить купленные позиции для рекомендации товаров
+            product_ids = order.items.values_list("product_id")
+            products = Product.objects.filter(id__in=product_ids)
+            r = Recommender()
+            r.products_bought(products)
+
             # запустить асинзронные задания
             payment_completed.delay(order.id)
-            order.save()
 
     return HttpResponse(status=200)

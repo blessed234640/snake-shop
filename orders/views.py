@@ -22,6 +22,8 @@ def order_create(request):
                 order.coupon = cart.coupon
                 order.discount = cart.coupon.discount
             order.save()
+
+            # Создаем все OrderItem
             for item in cart:
                 OrderItem.objects.create(
                     order=order,
@@ -29,14 +31,29 @@ def order_create(request):
                     price=item["price"],
                     quantity=item["quantity"],
                 )
-                # Очистить корзину
-                cart.clear()
-                # Загружать асинхронные задания
-                order_created.delay(order.id)
-                # задать заказ в сеансе
-                request.session["order_id"] = order.id
-                # перенаправлять к платежу
-                return redirect(reverse("payment:process"))
+
+            # ДОБАВЬТЕ ЭТОТ КОД - запись рекомендаций
+            if len(cart) > 1:  # Если в корзине больше 1 товара
+                from shop.recommender import Recommender
+
+                r = Recommender()
+                cart_products = [item["product"] for item in cart]
+                print(
+                    f"✅ Записываем рекомендации для товаров: {[p.id for p in cart_products]}"
+                )
+                r.products_bought(cart_products)
+
+            # Очистить корзину
+            cart.clear()
+
+            # Загружать асинхронные задания
+            order_created.delay(order.id)
+
+            # задать заказ в сеансе
+            request.session["order_id"] = order.id
+
+            # перенаправлять к платежу
+            return redirect(reverse("payment:process"))
     else:
         form = OrderCreateForm()
     return render(request, "orders/order/create.html", {"cart": cart, "form": form})
