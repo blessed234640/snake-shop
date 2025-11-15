@@ -38,6 +38,7 @@ def product_detail(request, id, slug):
         "shop/product/detail.html",
         {
             "product": product,
+            "additional_images": additional_images,
             "cart_product_form": cart_product_form,
             "recommended_products": recommended_products,
         },
