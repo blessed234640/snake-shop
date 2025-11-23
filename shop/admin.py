@@ -1,12 +1,15 @@
 from django.contrib import admin
+from parler.admin import TranslatableAdmin
 
 from .models import Category, Product, ProductImage
 
 
 @admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(TranslatableAdmin):
     list_display = ["name", "slug"]
-    prepopulated_fields = {"slug": ("name",)}
+
+    def get_prepopulated_fields(self, request, obj=None):
+        return {"slug": ("name",)}
 
 
 class ProductImageInline(admin.TabularInline):
@@ -25,10 +28,8 @@ class ProductImageInline(admin.TabularInline):
 
 
 @admin.register(Product)
-class ProductAdmin(admin.ModelAdmin):
+class ProductAdmin(TranslatableAdmin):
     list_display = [
-        "name",
-        "slug",
         "price",
         "available",
         "created",
@@ -37,9 +38,11 @@ class ProductAdmin(admin.ModelAdmin):
     ]
     list_filter = ["available", "created", "updated", "category"]
     list_editable = ["price", "available"]
-    prepopulated_fields = {"slug": ("name",)}
     inlines = [ProductImageInline]
     readonly_fields = ["main_image_preview"]
+
+    def get_prepopulated_fields(self, request, obj=None):
+        return {"slug": ("name",)}
 
     def main_image_preview(self, obj):
         if obj.image:
@@ -51,10 +54,10 @@ class ProductAdmin(admin.ModelAdmin):
 
     # Опционально: можно добавить поля для фильтрации в детальном просмотре
     fieldsets = (
-        (None, {"fields": ("category", "name", "slug", "price", "available")}),
+        (None, {"fields": ("category", "price", "available")}),
         (
             "Описание и изображения",
-            {"fields": ("description", "image", "main_image_preview")},
+            {"fields": ("image", "main_image_preview")},
         ),
     )
 
