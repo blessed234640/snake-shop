@@ -18,7 +18,10 @@ class Category(TranslatableModel):
         verbose_name_plural = "categories"
 
     def __str__(self):
-        return self.name
+        try:
+            return self.name
+        except:
+            return f"Category #{self.id}"  # Fallback если переводов нет
 
     def get_absolute_url(self):
         return reverse("shop:product_list_by_category", args=[self.slug])
@@ -48,7 +51,10 @@ class Product(TranslatableModel):
         ]
 
     def __str__(self):
-        return self.name
+        try:
+            return self.name
+        except:
+            return f"Product #{self.id}"  # Fallback если переводов нет
 
     def get_absolute_url(self):
         return reverse("shop:product_detail", args=[self.id, self.slug])
@@ -74,4 +80,7 @@ class ProductImage(models.Model):
         verbose_name_plural = "изображения товаров"
 
     def __str__(self):
-        return f"Изображение для {self.product.name}"
+        try:
+            return f"Изображение для {self.product.name}"
+        except:
+            return f"Изображение для товара #{self.product.id}"  # Fallback

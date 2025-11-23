@@ -2,77 +2,93 @@
 {% load i18n static %}
 
 {% block title %}
-  {% if category %}{{ category.name }} - {% translate "Snake Paradise" %}{% else %}{% translate "Premium snakes" %} - {% translate "Snake Paradise" %}{% endif %}
+    {% if category %}
+        {{ category.name }} - {% translate "Snake Paradise" %}
+    {% else %}
+        {% translate "Premium snakes" %} - {% translate "Snake Paradise" %}
+    {% endif %}
 {% endblock %}
 
 {% block content %}
-  <div class="catalog-container">
+<div class="catalog-container">
     <div id="sidebar">
-      <h3>🐍 {% translate "Categories" %}</h3>
-      <ul>
-        <li {% if not category %}class="selected"{% endif %}>
-          <a href="{% url 'shop:product_list' %}">
-            🌟 {% translate "All snakes" %}
-          </a>
-        </li>
-        {% for c in categories %}
-          <li {% if category.slug == c.slug %}class="selected"{% endif %}>
-            <a href="{{ c.get_absolute_url }}">
-              {{ c.name }}
-            </a>
-          </li>
-        {% endfor %}
-      </ul>
+        <h3>🐍 {% translate "Categories" %}</h3>
+        <ul>
+            <li {% if not category %}class="selected"{% endif %}>
+                <a href="{% url 'shop:product_list' %}">
+                    🌟 {% translate "All products" %}
+                </a>
+            </li>
+            {% for c in categories %}
+            <li {% if category.slug == c.slug %}class="selected"{% endif %}>
+                <a href="{{ c.get_absolute_url }}">
+                    {{ c.name }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
 
-      <div style="margin-top: 2rem; padding: 1.5rem; background: var(--bg-header); border-radius: var(--border-radius); border: 1px solid var(--border-color);">
-        <h4 style="color: var(--accent-primary); margin-bottom: 1rem;">ℹ️ {% translate "Care tips" %}</h4>
-        <p style="font-size: 0.9rem; color: var(--text-secondary);">
-          {% translate "All our snakes come with detailed care instructions and health guarantee." %}
-        </p>
-      </div>
+        <div class="care-tips">
+            <h4>ℹ️ {% translate "Care tips" %}</h4>
+            <p>
+                {% translate "All our snakes come with detailed care instructions and health guarantee." %}
+            </p>
+        </div>
     </div>
 
     <div id="main" class="product-list-container">
-      <div class="page-header">
-        <h1>
-          {% if category %}
-            {{ category.name }}
-          {% else %}
-            🐍 {% translate "Premium snake collection" %}
-          {% endif %}
-        </h1>
-        <p style="color: var(--text-secondary); font-size: 1.1rem; margin-top: 0.5rem;">
-          {% if category %}
-            {% blocktranslate with category_name=category.name %}Explore our selection of {{ category_name }} snakes{% endblocktranslate %}
-          {% else %}
-            {% translate "Discover our exclusive collection of healthy and well-cared reptiles" %}
-          {% endif %}
-        </p>
-      </div>
+        <div class="page-header">
+            <h1>
+                {% if category %}
+                    {{ category.name }}
+                {% else %}
+                    🐍 {% translate "Premium snake collection" %}
+                {% endif %}
+            </h1>
+            <p class="page-description">
+                {% if category %}
+                    {% blocktranslate with category_name=category.name %}
+                        Explore our selection of {{ category_name }} snakes
+                    {% endblocktranslate %}
+                {% else %}
+                    {% translate "Discover our exclusive collection of healthy and well-cared reptiles" %}
+                {% endif %}
+            </p>
+        </div>
 
-      <div class="product-list">
-        {% for product in products %}
-          <div class="item">
-            <a href="{{ product.get_absolute_url }}">
-              <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'shop/img/no_image.png' %}{% endif %}"
-                   alt="{{ product.name }}">
-              <h3 class="product-name">{{ product.name }}</h3>
-            </a>
-            <div class="price">₽{{ product.price }}</div>
-            <form action="{% url 'cart:cart_add' product.id %}" method="post">
-              {{ cart_product_form }}
-              {% csrf_token %}
-              <input type="submit" value='🛒 {% translate "Add to cart" %}' class="button" style="width: 100%; margin-top: 1rem;">
-            </form>
-          </div>
-        {% empty %}
-          <div style="grid-column: 1 / -1; text-align: center; padding: 3rem; color: var(--text-secondary);">
-            <h3>{% translate "No snakes in this category yet" %}</h3>
-            <p>{% translate "Check back later - new arrivals coming soon!" %}</p>
-            <a href="{% url 'shop:product_list' %}" class="button" style="margin-top: 1rem;">{% translate "View all snakes" %}</a>
-          </div>
-        {% endfor %}
-      </div>
+        <div class="product-list">
+            {% for product in products %}
+            <div class="item">
+                <a href="{{ product.get_absolute_url }}">
+                    <img
+                        src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'shop/img/no_image.png' %}{% endif %}"
+                        alt="{{ product.name }}"
+                    />
+                    <h3 class="product-name">{{ product.name }}</h3>
+                </a>
+                <div class="price">₽{{ product.price }}</div>
+                <form action="{% url 'cart:cart_add' product.id %}" method="post">
+                    {{ cart_product_form }}
+                    {% csrf_token %}
+                    <input
+                        type="submit"
+                        value='🛒 {% translate "Add to cart" %}'
+                        class="button add-to-cart-btn"
+                    />
+                </form>
+            </div>
+            {% empty %}
+            <div class="empty-category">
+                <h3>{% translate "No snakes in this category yet" %}</h3>
+                <p>
+                    {% translate "Check back later - new arrivals coming soon!" %}
+                </p>
+                <a href="{% url 'shop:product_list' %}" class="button">
+                    {% translate "View all snakes" %}
+                </a>
+            </div>
+            {% endfor %}
+        </div>
     </div>
-  </div>
+</div>
 {% endblock %}
