@@ -10,10 +10,10 @@ class Category(TranslatableModel):
     )
 
     class Meta:
-        ordering = ["name"]
-        indexes = [
-            models.Index(fields=["name"]),
-        ]
+        # ordering = ["name"]
+        # indexes = [
+        #     models.Index(fields=["name"]),
+        # ]
         verbose_name = "category"
         verbose_name_plural = "categories"
 
@@ -40,10 +40,10 @@ class Product(TranslatableModel):
     updated = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ["name"]
+        # ordering = ["name"]
         indexes = [
-            models.Index(fields=["id", "slug"]),
-            models.Index(fields=["name"]),
+            # models.Index(fields=["id", "slug"]),
+            # models.Index(fields=["name"]),
             models.Index(fields=["-created"]),
         ]
 
