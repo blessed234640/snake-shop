@@ -1,5 +1,11 @@
-{% extends "shop/base.html" %} {% load static %} {% block title %}
-{{product.name }} - Snake Paradise {% endblock %} {% block content %}
+{% extends "shop/base.html" %} 
+{% load i18n static %} 
+
+{% block title %}
+  {{ product.name }} - {% translate "Snake Paradise" %}
+{% endblock %} 
+
+{% block content %}
 <div class="product-detail">
     <!-- Галерея изображений -->
     <div class="product-gallery">
@@ -30,7 +36,7 @@
     <div class="product-info">
         <h1>{{ product.name }}</h1>
         <h2 style="color: var(--text-secondary); margin: 1rem 0">
-            📁 Категория:
+            📁 {% translate "Category" %}:
             <a
                 href="{{ product.category.get_absolute_url }}"
                 style="color: var(--accent-primary)"
@@ -48,19 +54,19 @@
         >
             <div style="margin-bottom: 1.5rem">{{ cart_product_form }}</div>
             {% csrf_token %}
-            <input type="submit" value="🛒 Добавить в корзину" class="button" />
+            <input type="submit" value='🛒 {% translate "Add to cart" %}' class="button" />
         </form>
 
         <div class="product-description">
             <h3 style="color: var(--accent-primary); margin-bottom: 1rem">
-                📝 Описание
+                📝 {% translate "Description" %}
             </h3>
             <div style="color: var(--text-secondary); line-height: 1.8">
                 {{ product.description|linebreaks }}
             </div>
         </div>
 
-        <!-- Блок рекомендаций - ПЕРЕМЕЩЕН ПОСЛЕ ОПИСАНИЯ -->
+        <!-- Блок рекомендаций -->
         {% if recommended_products %}
         <div
             class="recommendations-section"
@@ -77,7 +83,7 @@
                     text-align: center;
                 "
             >
-                🐍 С этим товаром также покупают
+                🐍 {% translate "People who bought this also bought" %}
             </h3>
             <div
                 class="recommendations-grid"
@@ -154,7 +160,9 @@
         {% endif %}
     </div>
 </div>
-{% endblock %} {% block domready %}
+{% endblock %}
+
+{% block domready %}
 <script>
     function changeImage(imageUrl, element) {
         // Меняем основное изображение

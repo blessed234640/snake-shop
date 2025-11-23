@@ -1,0 +1,230 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-11-19 21:26+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? "
+"1 : 2;\n"
+
+#: .\orders\models.py:11
+msgid "first name"
+msgstr "nombre"
+
+#: .\orders\models.py:12
+msgid "last name"
+msgstr "apellidos"
+
+#: .\orders\models.py:13
+msgid "e-mail"
+msgstr "e-mail"
+
+#: .\orders\models.py:14
+msgid "address"
+msgstr "dirección"
+
+#: .\orders\models.py:15
+msgid "postal code"
+msgstr "código postal"
+
+#: .\orders\models.py:16
+msgid "city"
+msgstr "ciudad"
+
+#: .\orders\templates\orders\order\create.html:5
+#: .\orders\templates\orders\order\create.html:10
+msgid "Checkout"
+msgstr ""
+
+#: .\orders\templates\orders\order\create.html:5
+#: .\orders\templates\orders\order\created.html:5
+msgid "Snake Paradise"
+msgstr ""
+
+#: .\orders\templates\orders\order\create.html:22
+msgid "Shipping information"
+msgstr ""
+
+#: .\orders\templates\orders\order\create.html:77
+msgid "Back to cart"
+msgstr ""
+
+#: .\orders\templates\orders\order\create.html:81
+msgid "Place order"
+msgstr ""
+
+#: .\orders\templates\orders\order\create.html:99
+msgid "Your order"
+msgstr ""
+
+#: .\orders\templates\orders\order\create.html:126
+#, python-format
+msgid ""
+"\n"
+"                            \"%(code)s\" (%(discount)s%% off)\n"
+"                        "
+msgstr ""
+
+#: .\orders\templates\orders\order\create.html:141
+#: .\orders\templates\orders\order\pdf.html:56
+msgid "Total"
+msgstr ""
+
+#: .\orders\templates\orders\order\create.html:154
+#: .\orders\templates\orders\order\created.html:43
+msgid "Delivery"
+msgstr ""
+
+#: .\orders\templates\orders\order\create.html:163
+msgid ""
+"All snakes are delivered by specialized carriers with live delivery "
+"guarantee."
+msgstr ""
+
+#: .\orders\templates\orders\order\create.html:167
+msgid "Thermoregulated packaging"
+msgstr ""
+
+#: .\orders\templates\orders\order\create.html:170
+msgid "Next day express delivery"
+msgstr ""
+
+#: .\orders\templates\orders\order\create.html:173
+msgid "Live delivery guarantee"
+msgstr ""
+
+#: .\orders\templates\orders\order\create.html:176
+msgid "Veterinary certificate included"
+msgstr ""
+
+#: .\orders\templates\orders\order\created.html:5
+msgid "Order confirmed"
+msgstr ""
+
+#: .\orders\templates\orders\order\created.html:12
+msgid "Thank you for your order!"
+msgstr ""
+
+#: .\orders\templates\orders\order\created.html:15
+msgid "Your order has been successfully placed and is being processed."
+msgstr ""
+
+#: .\orders\templates\orders\order\created.html:18
+msgid "Order number"
+msgstr ""
+
+#: .\orders\templates\orders\order\created.html:24
+msgid "What happens next?"
+msgstr ""
+
+#: .\orders\templates\orders\order\created.html:29
+msgid "Order confirmation"
+msgstr ""
+
+#: .\orders\templates\orders\order\created.html:30
+msgid "You will receive an email confirmation shortly"
+msgstr ""
+
+#: .\orders\templates\orders\order\created.html:36
+msgid "Preparation for shipping"
+msgstr ""
+
+#: .\orders\templates\orders\order\created.html:37
+msgid "We will prepare your snake for safe shipping"
+msgstr ""
+
+#: .\orders\templates\orders\order\created.html:44
+msgid "Your order will be shipped by specialized carrier"
+msgstr ""
+
+#: .\orders\templates\orders\order\created.html:50
+msgid "Receiving"
+msgstr ""
+
+#: .\orders\templates\orders\order\created.html:51
+msgid "Your new snake will safely arrive at your door"
+msgstr ""
+
+#: .\orders\templates\orders\order\created.html:58
+msgid "Have questions about your order?"
+msgstr ""
+
+#: .\orders\templates\orders\order\created.html:60
+msgid "Contact our reptile experts:"
+msgstr ""
+
+#: .\orders\templates\orders\order\created.html:67
+msgid "Continue shopping"
+msgstr ""
+
+#: .\orders\templates\orders\order\created.html:70
+msgid "Home page"
+msgstr ""
+
+#: .\orders\templates\orders\order\pdf.html:4
+msgid "Snake Shop"
+msgstr ""
+
+#: .\orders\templates\orders\order\pdf.html:6
+msgid "Invoice no."
+msgstr ""
+
+#: .\orders\templates\orders\order\pdf.html:11
+msgid "Bill to"
+msgstr ""
+
+#: .\orders\templates\orders\order\pdf.html:18
+msgid "Items bought"
+msgstr ""
+
+#: .\orders\templates\orders\order\pdf.html:22
+msgid "Product"
+msgstr ""
+
+#: .\orders\templates\orders\order\pdf.html:23
+msgid "Price"
+msgstr ""
+
+#: .\orders\templates\orders\order\pdf.html:24
+msgid "Quantity"
+msgstr ""
+
+#: .\orders\templates\orders\order\pdf.html:25
+msgid "Cost"
+msgstr ""
+
+#: .\orders\templates\orders\order\pdf.html:39
+msgid "Subtotal"
+msgstr ""
+
+#: .\orders\templates\orders\order\pdf.html:46
+#, python-format
+msgid ""
+"\n"
+"                \"%(code)s\" (%(discount)s%% off)\n"
+"            "
+msgstr ""
+
+#: .\orders\templates\orders\order\pdf.html:63
+msgid "PAID"
+msgstr ""
+
+#: .\orders\templates\orders\order\pdf.html:63
+msgid "PENDING PAYMENT"
+msgstr ""
+
+#: .\orders\urls.py:10
+msgid "create/"
+msgstr ""

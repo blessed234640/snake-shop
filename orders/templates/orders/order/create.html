@@ -1,7 +1,13 @@
-{% extends "shop/base.html" %} {% block title %} Оформление заказа - Snake
-Paradise {% endblock %} {% block content %}
+{% extends "shop/base.html" %} 
+{% load i18n %} 
+
+{% block title %}
+  {% translate "Checkout" %} - {% translate "Snake Paradise" %}
+{% endblock %} 
+
+{% block content %}
 <div class="checkout-container">
-    <h1>📋 Оформление заказа</h1>
+    <h1>📋 {% translate "Checkout" %}</h1>
 
     <div
         style="
@@ -13,7 +19,7 @@ Paradise {% endblock %} {% block content %}
     >
         <div>
             <h2 style="color: var(--accent-primary); margin-bottom: 1.5rem">
-                Данные для доставки
+                {% translate "Shipping information" %}
             </h2>
             <form
                 method="post"
@@ -38,12 +44,13 @@ Paradise {% endblock %} {% block content %}
                                 color: var(--text-primary);
                             "
                         >
-                            {{ field.label }} {% if field.field.required %}<span
-                                style="color: #dc3545"
-                                >*</span
-                            >{% endif %}
+                            {{ field.label }} 
+                            {% if field.field.required %}
+                            <span style="color: #dc3545">*</span>
+                            {% endif %}
                         </label>
-                        {{ field }} {% if field.errors %}
+                        {{ field }} 
+                        {% if field.errors %}
                         <div
                             style="
                                 color: #dc3545;
@@ -51,7 +58,7 @@ Paradise {% endblock %} {% block content %}
                                 margin-top: 0.5rem;
                             "
                         >
-                            {% for error in field.errors %}⚠️ {{ error }} {%endfor %}
+                            {% for error in field.errors %}⚠️ {{ error }} {% endfor %}
                         </div>
                         {% endif %}
                     </div>
@@ -67,11 +74,11 @@ Paradise {% endblock %} {% block content %}
                     "
                 >
                     <a href="{% url 'cart:cart_detail' %}" class="button light">
-                        ← Назад в корзину
+                        ← {% translate "Back to cart" %}
                     </a>
                     <input
                         type="submit"
-                        value="🐍 Подтвердить заказ →"
+                        value='🐍 {% translate "Place order" %} →'
                         class="button"
                     />
                 </div>
@@ -89,7 +96,7 @@ Paradise {% endblock %} {% block content %}
                 "
             >
                 <h3 style="color: var(--accent-primary); margin-bottom: 1rem">
-                    📦 Ваш заказ
+                    📦 {% translate "Your order" %}
                 </h3>
                 <div style="margin: 1.5rem 0">
                     {% for item in cart %}
@@ -102,23 +109,25 @@ Paradise {% endblock %} {% block content %}
                         "
                     >
                         <div>
-                            <span style="color: var(--text-secondary)"
-                                >{{ item.quantity }}x</span
-                            >
-                            <span style="margin-left: 0.5rem"
-                                >{{ item.product.name }}</span
-                            >
+                            <span style="color: var(--text-secondary)">
+                                {{ item.quantity }}x
+                            </span>
+                            <span style="margin-left: 0.5rem">
+                                {{ item.product.name }}
+                            </span>
                         </div>
-                        <span style="font-weight: 600"
-                            >₽{{ item.total_price }}</span
-                        >
+                        <span style="font-weight: 600">
+                            ₽{{ item.total_price }}
+                        </span>
                     </div>
                     {% endfor %}
                     {% if cart.coupon %}
-                        <li>
-                        "{{ cart.coupon.code }}" ({{ cart.coupon.discount }}% off)
+                    <li>
+                        {% blocktranslate with code=cart.coupon.code discount=cart.coupon.discount %}
+                            "{{ code }}" ({{ discount }}% off)
+                        {% endblocktranslate %}
                         <span class="neg">- ₽{{ cart.get_discount|floatformat:2 }}</span>
-                        </li>
+                    </li>
                     {% endif %}
                 </div>
                 <div
@@ -129,7 +138,7 @@ Paradise {% endblock %} {% block content %}
                         font-size: 1.2rem;
                     "
                 >
-                    <strong>Итого: ₽{{ cart.get_total_price_after_discount|floatformat:2 }}</strong>
+                    <strong>{% translate "Total" %}: ₽{{ cart.get_total_price_after_discount|floatformat:2 }}</strong>
                 </div>
             </div>
 
@@ -142,7 +151,7 @@ Paradise {% endblock %} {% block content %}
                 "
             >
                 <h4 style="color: var(--accent-primary); margin-bottom: 1rem">
-                    🚚 Доставка
+                    🚚 {% translate "Delivery" %}
                 </h4>
                 <p
                     style="
@@ -151,19 +160,20 @@ Paradise {% endblock %} {% block content %}
                         margin-bottom: 1rem;
                     "
                 >
-                    Все змеи доставляются специализированными перевозчиками с
-                    гарантией живой доставки.
+                    {% translate "All snakes are delivered by specialized carriers with live delivery guarantee." %}
                 </p>
                 <ul style="list-style: none; color: var(--text-secondary)">
                     <li style="padding: 0.3rem 0">
-                        ✓ Терморегулируемая упаковка
+                        ✓ {% translate "Thermoregulated packaging" %}
                     </li>
                     <li style="padding: 0.3rem 0">
-                        ✓ Экспресс-доставка на следующий день
+                        ✓ {% translate "Next day express delivery" %}
                     </li>
-                    <li style="padding: 0.3rem 0">✓ Гарантия живой доставки</li>
                     <li style="padding: 0.3rem 0">
-                        ✓ Ветеринарная справка включена
+                        ✓ {% translate "Live delivery guarantee" %}
+                    </li>
+                    <li style="padding: 0.3rem 0">
+                        ✓ {% translate "Veterinary certificate included" %}
                     </li>
                 </ul>
             </div>

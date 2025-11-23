@@ -1,18 +1,18 @@
 {% extends "shop/base.html" %}
-{% load static %}
+{% load i18n static %}
 
 {% block title %}
-  {% if category %}{{ category.name }} - Snake Paradise{% else %}Премиум змеи - Snake Paradise{% endif %}
+  {% if category %}{{ category.name }} - {% translate "Snake Paradise" %}{% else %}{% translate "Premium snakes" %} - {% translate "Snake Paradise" %}{% endif %}
 {% endblock %}
 
 {% block content %}
   <div class="catalog-container">
     <div id="sidebar">
-      <h3>🐍 Категории</h3>
+      <h3>🐍 {% translate "Categories" %}</h3>
       <ul>
         <li {% if not category %}class="selected"{% endif %}>
           <a href="{% url 'shop:product_list' %}">
-            🌟 Все змеи
+            🌟 {% translate "All snakes" %}
           </a>
         </li>
         {% for c in categories %}
@@ -25,9 +25,9 @@
       </ul>
 
       <div style="margin-top: 2rem; padding: 1.5rem; background: var(--bg-header); border-radius: var(--border-radius); border: 1px solid var(--border-color);">
-        <h4 style="color: var(--accent-primary); margin-bottom: 1rem;">ℹ️ Советы по уходу</h4>
+        <h4 style="color: var(--accent-primary); margin-bottom: 1rem;">ℹ️ {% translate "Care tips" %}</h4>
         <p style="font-size: 0.9rem; color: var(--text-secondary);">
-          Все наши змеи поставляются с подробными инструкциями по уходу и гарантией здоровья.
+          {% translate "All our snakes come with detailed care instructions and health guarantee." %}
         </p>
       </div>
     </div>
@@ -38,14 +38,14 @@
           {% if category %}
             {{ category.name }}
           {% else %}
-            🐍 Коллекция премиум змей
+            🐍 {% translate "Premium snake collection" %}
           {% endif %}
         </h1>
         <p style="color: var(--text-secondary); font-size: 1.1rem; margin-top: 0.5rem;">
           {% if category %}
-            Изучите нашу подборку змей категории {{ category.name }}
+            {% blocktranslate with category_name=category.name %}Explore our selection of {{ category_name }} snakes{% endblocktranslate %}
           {% else %}
-            Откройте для себя нашу эксклюзивную коллекцию здоровых и ухоженных рептилий
+            {% translate "Discover our exclusive collection of healthy and well-cared reptiles" %}
           {% endif %}
         </p>
       </div>
@@ -62,14 +62,14 @@
             <form action="{% url 'cart:cart_add' product.id %}" method="post">
               {{ cart_product_form }}
               {% csrf_token %}
-              <input type="submit" value="🛒 В корзину" class="button" style="width: 100%; margin-top: 1rem;">
+              <input type="submit" value='🛒 {% translate "Add to cart" %}' class="button" style="width: 100%; margin-top: 1rem;">
             </form>
           </div>
         {% empty %}
           <div style="grid-column: 1 / -1; text-align: center; padding: 3rem; color: var(--text-secondary);">
-            <h3>В этой категории пока нет змей</h3>
-            <p>Загляните позже - скоро появятся новые поступления!</p>
-            <a href="{% url 'shop:product_list' %}" class="button" style="margin-top: 1rem;">Смотреть всех змей</a>
+            <h3>{% translate "No snakes in this category yet" %}</h3>
+            <p>{% translate "Check back later - new arrivals coming soon!" %}</p>
+            <a href="{% url 'shop:product_list' %}" class="button" style="margin-top: 1rem;">{% translate "View all snakes" %}</a>
           </div>
         {% endfor %}
       </div>

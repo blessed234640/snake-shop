@@ -1,8 +1,24 @@
 {% extends "shop/base.html" %}
+{% load i18n %}
 
-{% block title %}Payment canceled{% endblock %}
+{% block title %}{% translate "Payment canceled" %}{% endblock %}
 
 {% block content %}
-  <h1>Your payment has not been processed</h1>
-  <p>There was a problem processing your payment.</p>
+  <div style="text-align: center; padding: 3rem;">
+    <div style="font-size: 4rem; margin-bottom: 1rem;">❌</div>
+    <h1 style="color: #dc3545; margin-bottom: 1rem;">
+      {% translate "Your payment has not been processed" %}
+    </h1>
+    <p style="font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 2rem;">
+      {% translate "There was a problem processing your payment." %}
+    </p>
+    <div style="display: flex; gap: 1rem; justify-content: center;">
+      <a href="{% url 'cart:cart_detail' %}" class="button light">
+        {% translate "Back to cart" %}
+      </a>
+      <a href="{% url 'shop:product_list' %}" class="button">
+        {% translate "Continue shopping" %}
+      </a>
+    </div>
+  </div>
 {% endblock %}

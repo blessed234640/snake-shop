@@ -1,0 +1,392 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MyShop 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-11-19 21:26+0500\n"
+"PO-Revision-Date: 2025-11-18 12:22+0000\n"
+"Last-Translator:   <arturazimov200577@gmail.com>\n"
+"Language-Team: Russian <ru@li.org>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Translated-Using: django-rosetta 0.10.0\n"
+
+#: .\cart\forms.py:9
+msgid "Количество"
+msgstr ""
+
+#: .\cart\templates\cart\detail.html:5 .\cart\templates\cart\detail.html:10
+msgid "Shopping cart"
+msgstr "Корзина покупок"
+
+# Основные фразы
+#: .\cart\templates\cart\detail.html:5 .\shop\templates\shop\base.html:13
+#: .\shop\templates\shop\product\detail.html:5
+#: .\shop\templates\shop\product\list.html:5
+msgid "Snake Paradise"
+msgstr "Змеиный Рай"
+
+#: .\cart\templates\cart\detail.html:17
+#: .\payment\templates\payment\process.html:11
+msgid "Image"
+msgstr "Изображение"
+
+#: .\cart\templates\cart\detail.html:18
+#: .\payment\templates\payment\process.html:12
+msgid "Product"
+msgstr "Товар"
+
+#: .\cart\templates\cart\detail.html:19
+#: .\payment\templates\payment\process.html:14
+msgid "Quantity"
+msgstr "Количество"
+
+#: .\cart\templates\cart\detail.html:20 .\cart\templates\cart\detail.html:68
+msgid "Remove"
+msgstr "Удалить"
+
+#: .\cart\templates\cart\detail.html:21
+msgid "Unit price"
+msgstr "Цена за шт."
+
+#: .\cart\templates\cart\detail.html:22
+#: .\payment\templates\payment\process.html:13
+msgid "Price"
+msgstr "Стоимость"
+
+#: .\cart\templates\cart\detail.html:54
+msgid "Update"
+msgstr "Обновить"
+
+# Общие
+#: .\cart\templates\cart\detail.html:83
+#: .\payment\templates\payment\process.html:34
+msgid "Subtotal"
+msgstr "Промежуточный итог"
+
+#: .\cart\templates\cart\detail.html:91
+#, python-format
+msgid ""
+"\n"
+"                            Coupon \"%(code)s\" (%(discount)s%% discount)\n"
+"                        "
+msgstr ""
+
+#: .\cart\templates\cart\detail.html:103
+#: .\payment\templates\payment\process.html:15
+#: .\payment\templates\payment\process.html:54
+msgid "Total"
+msgstr "Итого"
+
+#: .\cart\templates\cart\detail.html:124
+msgid "Apply coupon"
+msgstr "Применить купон"
+
+#: .\cart\templates\cart\detail.html:134
+msgid "Apply"
+msgstr ""
+
+#: .\cart\templates\cart\detail.html:161
+#: .\shop\templates\shop\product\detail.html:86
+msgid "People who bought this also bought"
+msgstr ""
+
+#: .\cart\templates\cart\detail.html:263
+#: .\shop\templates\shop\product\detail.html:57
+#: .\shop\templates\shop\product\list.html:65
+msgid "Add to cart"
+msgstr "Добавить в корзину"
+
+#: .\cart\templates\cart\detail.html:275
+#: .\payment\templates\payment\canceled.html:20
+#: .\payment\templates\payment\completed.html:16
+msgid "Continue shopping"
+msgstr "Продолжить покупки"
+
+#: .\cart\templates\cart\detail.html:278
+msgid "Checkout"
+msgstr "Оформление заказа"
+
+#: .\cart\templates\cart\detail.html:292 .\shop\templates\shop\base.html:44
+msgid "Your cart is empty"
+msgstr "Ваша корзина пуста"
+
+# Текст пустой корзины
+#: .\cart\templates\cart\detail.html:295
+msgid "Discover our amazing collection of snakes!"
+msgstr "Откройте для себя нашу удивительную коллекцию змей!"
+
+# Кнопка в пустой корзине
+#: .\cart\templates\cart\detail.html:298
+msgid "View catalog"
+msgstr "Смотреть каталог"
+
+#: .\cart\templates\cart\detail.html:345
+msgid "Added!"
+msgstr ""
+
+#: .\coupons\forms.py:6
+msgid "Скидка"
+msgstr ""
+
+#: .\myshop\settings.py:89
+msgid "English"
+msgstr "Английский"
+
+#: .\myshop\settings.py:90
+msgid "Russian"
+msgstr "Русский"
+
+#: .\myshop\settings.py:91
+msgid "Spanish"
+msgstr "Испанский"
+
+#: .\myshop\urls.py:13
+msgid "cart/"
+msgstr ""
+
+#: .\myshop\urls.py:14
+msgid "orders/"
+msgstr ""
+
+#: .\myshop\urls.py:15
+msgid "payment/"
+msgstr ""
+
+# Купоны
+#: .\myshop\urls.py:16
+#, fuzzy
+#| msgid "coupon"
+msgid "coupons/"
+msgstr "купон"
+
+#: .\payment\templates\payment\canceled.html:4
+msgid "Payment canceled"
+msgstr "Платеж отменен"
+
+#: .\payment\templates\payment\canceled.html:10
+msgid "Your payment has not been processed"
+msgstr "Ваш платеж не был обработан"
+
+#: .\payment\templates\payment\canceled.html:13
+#, fuzzy
+#| msgid "There was a problem processing your payment"
+msgid "There was a problem processing your payment."
+msgstr "Возникла проблема при обработке вашего платежа"
+
+#: .\payment\templates\payment\canceled.html:17
+msgid "Back to cart"
+msgstr "Назад в корзину"
+
+#: .\payment\templates\payment\completed.html:4
+msgid "Payment successful"
+msgstr "Платеж успешен"
+
+#: .\payment\templates\payment\completed.html:10
+msgid "Your payment was successful"
+msgstr "Ваш платеж был успешно обработан"
+
+#: .\payment\templates\payment\completed.html:13
+#, fuzzy
+#| msgid "Your payment has been processed successfully"
+msgid "Your payment has been processed successfully."
+msgstr "Ваш платеж был успешно обработан"
+
+# Платежи
+#: .\payment\templates\payment\process.html:4
+msgid "Pay your order"
+msgstr "Оплата заказа"
+
+#: .\payment\templates\payment\process.html:7
+msgid "Order summary"
+msgstr "Краткое описание заказа"
+
+#: .\payment\templates\payment\process.html:42
+#, python-format
+msgid ""
+"\n"
+"              \"%(code)s\" coupon (%(discount)s%% off)\n"
+"            "
+msgstr ""
+
+#: .\payment\templates\payment\process.html:64
+msgid "Pay now"
+msgstr "Оплатить сейчас"
+
+#: .\payment\urls.py:9
+msgid "process/"
+msgstr ""
+
+#: .\payment\urls.py:10
+msgid "completed/"
+msgstr ""
+
+#: .\payment\urls.py:11
+#, fuzzy
+#| msgid "Payment canceled"
+msgid "canceled/"
+msgstr "Платеж отменен"
+
+#: .\shop\templates\shop\base.html:7
+msgid "Snake Shop"
+msgstr "Магазин Змей"
+
+# Корзина
+#: .\shop\templates\shop\base.html:35
+msgid "Your cart"
+msgstr "Корзина"
+
+#: .\shop\templates\shop\base.html:37
+#, python-format
+msgid ""
+"\n"
+"                                %(items)s item, $%(total)s\n"
+"                            "
+msgid_plural ""
+"\n"
+"                                %(items)s items, $%(total)s\n"
+"                            "
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+# Футер
+#: .\shop\templates\shop\base.html:62
+msgid "Premium reptiles for enthusiasts and collectors"
+msgstr "Премиум рептилии для энтузиастов и коллекционеров"
+
+#: .\shop\templates\shop\base.html:65
+msgid "Safe delivery • Expert care • Quality guarantee"
+msgstr "Безопасная доставка • Экспертный уход • Гарантия качества"
+
+# Описания
+#: .\shop\templates\shop\product\detail.html:39
+msgid "Category"
+msgstr "Категория"
+
+#: .\shop\templates\shop\product\detail.html:62
+msgid "Description"
+msgstr "Описание"
+
+#: .\shop\templates\shop\product\list.html:5
+msgid "Premium snakes"
+msgstr "Премиум змеи"
+
+# Категории и фильтры
+#: .\shop\templates\shop\product\list.html:11
+msgid "Categories"
+msgstr "Категории"
+
+#: .\shop\templates\shop\product\list.html:15
+msgid "All snakes"
+msgstr "Все змеи"
+
+#: .\shop\templates\shop\product\list.html:28
+msgid "Care tips"
+msgstr "Советы по уходу"
+
+# Текст в сайдбаре
+#: .\shop\templates\shop\product\list.html:30
+msgid ""
+"All our snakes come with detailed care instructions and health guarantee."
+msgstr ""
+"Все наши змеи поставляются с подробными инструкциями по уходу и гарантией "
+"здоровья."
+
+# Заголовки
+#: .\shop\templates\shop\product\list.html:41
+msgid "Premium snake collection"
+msgstr "Коллекция премиум змей"
+
+#: .\shop\templates\shop\product\list.html:46
+#, python-format
+msgid "Explore our selection of %(category_name)s snakes"
+msgstr ""
+
+#: .\shop\templates\shop\product\list.html:48
+msgid "Discover our exclusive collection of healthy and well-cared reptiles"
+msgstr ""
+"Откройте для себя нашу эксклюзивную коллекцию здоровых и ухоженных рептилий"
+
+#: .\shop\templates\shop\product\list.html:70
+msgid "No snakes in this category yet"
+msgstr ""
+
+#: .\shop\templates\shop\product\list.html:71
+msgid "Check back later - new arrivals coming soon!"
+msgstr ""
+
+#: .\shop\templates\shop\product\list.html:72
+#, fuzzy
+#| msgid "All snakes"
+msgid "View all snakes"
+msgstr "Все змеи"
+
+#~ msgid "Order confirmed"
+#~ msgstr "Заказ подтвержден"
+
+#~ msgid "off"
+#~ msgstr "скидка"
+
+#~ msgid "Snakes"
+#~ msgstr "Змеи"
+
+#~ msgid "Terrariums"
+#~ msgstr "Террариумы"
+
+# Корзина - множественное число
+#~ msgid "item"
+#~ msgstr "товар"
+
+#~ msgid "items"
+#~ msgstr "товаров"
+
+# Форма заказа
+#~ msgid "Shipping information"
+#~ msgstr "Информация для доставки"
+
+#~ msgid "Your order"
+#~ msgstr "Ваш заказ"
+
+#~ msgid "Delivery"
+#~ msgstr "Доставка"
+
+# Текст доставки
+#~ msgid ""
+#~ "All snakes are delivered by specialized carriers with live delivery "
+#~ "guarantee."
+#~ msgstr ""
+#~ "Все змеи доставляются специализированными перевозчиками с гарантией живой "
+#~ "доставки."
+
+# Пункты доставки
+#~ msgid "Thermoregulated packaging"
+#~ msgstr "Терморегулируемая упаковка"
+
+#~ msgid "Next day express delivery"
+#~ msgstr "Экспресс-доставка на следующий день"
+
+#~ msgid "Live delivery guarantee"
+#~ msgstr "Гарантия живой доставки"
+
+#~ msgid "Veterinary certificate included"
+#~ msgstr "Ветеринарная справка включена"
+
+# Кнопка оформления заказа
+#~ msgid "Place order"
+#~ msgstr "Подтвердить заказ"
+
+# Купоны
+#~ msgid "Coupon"
+#~ msgstr "Купон"
+
+#~ msgid "discount"
+#~ msgstr "скидка"
+
+# Поле формы купона (скорее всего из формы)
+#~ msgid "Discount"
+#~ msgstr "Скидка"

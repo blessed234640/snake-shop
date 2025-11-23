@@ -1,69 +1,73 @@
 {% extends "shop/base.html" %}
+{% load i18n %}
 
 {% block title %}
-  Заказ подтвержден - Snake Paradise
+  {% translate "Order confirmed" %} - {% translate "Snake Paradise" %}
 {% endblock %}
 
 {% block content %}
   <div style="text-align: center; padding: 3rem; background: var(--bg-card); border-radius: var(--border-radius); border: 1px solid var(--border-color); max-width: 800px; margin: 0 auto;">
     <div style="font-size: 4rem; margin-bottom: 1rem;">🎉</div>
 
-    <h1 style="color: var(--accent-primary); margin-bottom: 1rem;">Спасибо за ваш заказ!</h1>
+    <h1 style="color: var(--accent-primary); margin-bottom: 1rem;">{% translate "Thank you for your order!" %}</h1>
 
     <div style="background: var(--bg-header); padding: 2rem; border-radius: var(--border-radius); margin: 2rem 0;">
-      <p style="font-size: 1.1rem; margin-bottom: 1rem;">Ваш заказ успешно оформлен и обрабатывается.</p>
+      <p style="font-size: 1.1rem; margin-bottom: 1rem;">{% translate "Your order has been successfully placed and is being processed." %}</p>
 
       <div style="margin-top: 1.5rem;">
-        <strong style="color: var(--text-secondary);">Номер заказа:</strong>
+        <strong style="color: var(--text-secondary);">{% translate "Order number" %}:</strong>
         <div style="color: var(--accent-primary); font-size: 1.5rem; font-weight: 700; margin-top: 0.5rem;">#{{ order.id }}</div>
       </div>
     </div>
 
     <div style="margin: 3rem 0;">
-      <h3 style="color: var(--accent-primary); margin-bottom: 2rem;">Что будет дальше?</h3>
+      <h3 style="color: var(--accent-primary); margin-bottom: 2rem;">{% translate "What happens next?" %}</h3>
       <div style="display: grid; gap: 1.5rem;">
         <div style="display: flex; align-items: center; gap: 1rem; padding: 1.5rem; background: var(--bg-header); border-radius: var(--border-radius);">
           <div style="font-size: 2rem;">📧</div>
           <div style="text-align: left;">
-            <strong>Подтверждение заказа</strong>
-            <p style="color: var(--text-secondary); margin-top: 0.5rem;">Вы получите email с подтверждением в ближайшее время</p>
+            <strong>{% translate "Order confirmation" %}</strong>
+            <p style="color: var(--text-secondary); margin-top: 0.5rem;">{% translate "You will receive an email confirmation shortly" %}</p>
           </div>
         </div>
         <div style="display: flex; align-items: center; gap: 1rem; padding: 1.5rem; background: var(--bg-header); border-radius: var(--border-radius);">
           <div style="font-size: 2rem;">📦</div>
           <div style="text-align: left;">
-            <strong>Подготовка к отправке</strong>
-            <p style="color: var(--text-secondary); margin-top: 0.5rem;">Мы подготовим вашу змею к безопасной пересылке</p>
+            <strong>{% translate "Preparation for shipping" %}</strong>
+            <p style="color: var(--text-secondary); margin-top: 0.5rem;">{% translate "We will prepare your snake for safe shipping" %}</p>
           </div>
         </div>
         <div style="display: flex; align-items: center; gap: 1rem; padding: 1.5rem; background: var(--bg-header); border-radius: var(--border-radius);">
           <div style="font-size: 2rem;">🚚</div>
           <div style="text-align: left;">
-            <strong>Доставка</strong>
-            <p style="color: var(--text-secondary); margin-top: 0.5rem;">Ваш заказ будет отправлен специализированным перевозчиком</p>
+            <strong>{% translate "Delivery" %}</strong>
+            <p style="color: var(--text-secondary); margin-top: 0.5rem;">{% translate "Your order will be shipped by specialized carrier" %}</p>
           </div>
         </div>
         <div style="display: flex; align-items: center; gap: 1rem; padding: 1.5rem; background: var(--bg-header); border-radius: var(--border-radius);">
           <div style="font-size: 2rem;">🐍</div>
           <div style="text-align: left;">
-            <strong>Получение</strong>
-            <p style="color: var(--text-secondary); margin-top: 0.5rem;">Ваша новая змея благополучно прибудет к вашей двери</p>
+            <strong>{% translate "Receiving" %}</strong>
+            <p style="color: var(--text-secondary); margin-top: 0.5rem;">{% translate "Your new snake will safely arrive at your door" %}</p>
           </div>
         </div>
       </div>
     </div>
 
     <div style="background: var(--bg-header); padding: 1.5rem; border-radius: var(--border-radius); margin: 2rem 0;">
-      <p style="margin-bottom: 0.5rem;"><strong>Есть вопросы по заказу?</strong></p>
-      <p style="color: var(--text-secondary);">Свяжитесь с нашими экспертами по рептилиям: <a href="mailto:support@snakeparadise.com" style="color: var(--accent-primary);">support@snakeparadise.com</a></p>
+      <p style="margin-bottom: 0.5rem;"><strong>{% translate "Have questions about your order?" %}</strong></p>
+      <p style="color: var(--text-secondary);">
+        {% translate "Contact our reptile experts:" %} 
+        <a href="mailto:support@snakeparadise.com" style="color: var(--accent-primary);">support@snakeparadise.com</a>
+      </p>
     </div>
 
     <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
       <a href="{% url 'shop:product_list' %}" class="button light">
-        Продолжить покупки
+        {% translate "Continue shopping" %}
       </a>
       <a href="/" class="button">
-        На главную
+        {% translate "Home page" %}
       </a>
     </div>
   </div>

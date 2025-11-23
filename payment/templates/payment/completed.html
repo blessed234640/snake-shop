@@ -1,8 +1,19 @@
 {% extends "shop/base.html" %}
+{% load i18n %}
 
-{% block title %}Payment successful{% endblock %}
+{% block title %}{% translate "Payment successful" %}{% endblock %}
 
 {% block content %}
-  <h1>Your payment was successful</h1>
-  <p>Your payment has been processed successfully.</p>
+  <div style="text-align: center; padding: 3rem;">
+    <div style="font-size: 4rem; margin-bottom: 1rem;">✅</div>
+    <h1 style="color: var(--accent-primary); margin-bottom: 1rem;">
+      {% translate "Your payment was successful" %}
+    </h1>
+    <p style="font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 2rem;">
+      {% translate "Your payment has been processed successfully." %}
+    </p>
+    <a href="{% url 'shop:product_list' %}" class="button">
+      {% translate "Continue shopping" %}
+    </a>
+  </div>
 {% endblock %}

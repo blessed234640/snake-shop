@@ -1,28 +1,47 @@
-{% load static %}
+{% load i18n static %}
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="{{ request.LANGUAGE_CODE }}">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Snake Paradise - Премиум змеи{% endblock %}</title>
+    <title>{% block title %}{% translate "Snake Shop" %}{% endblock %}</title>
     <link href="{% static 'shop/css/base.css' %}" rel="stylesheet">
 </head>
 <body>
     <div id="header">
         <div style="max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
-            <a href="/" class="logo">🐍 Snake Paradise</a>
+            <a href="/" class="logo">{% translate "Snake Paradise" %}</a>
+
+            <!-- ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКА - ДОБАВЬТЕ ЭТОТ БЛОК -->
+            <div style="margin-right: 20px;">
+                <form action="{% url 'set_language' %}" method="post">
+                    {% csrf_token %}
+                    <select name="language" onchange="this.form.submit()" style="padding: 5px; border-radius: 4px; border: 1px solid #ccc;">
+                        {% get_current_language as LANGUAGE_CODE %}
+                        {% get_available_languages as LANGUAGES %}
+                        {% for lang in LANGUAGES %}
+                            <option value="{{ lang.0 }}" {% if lang.0 == LANGUAGE_CODE %}selected{% endif %}>
+                                {{ lang.1 }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </form>
+            </div>
 
             <!-- Корзина перемещена в правый верхний угол -->
             <div class="cart-header">
                 {% with total_items=cart|length %}
                     {% if total_items > 0 %}
-                        🛒 Корзина:
+                        🛒 {% translate "Your cart" %}:
                         <a href="{% url 'cart:cart_detail' %}">
-                            {{ total_items }} товар{{ total_items|pluralize:"а,ов" }},
-                            ${{ cart.get_total_price }}
+                            {% blocktranslate with total=cart.get_total_price count items=total_items %}
+                                {{ items }} item, ${{ total }}
+                            {% plural %}
+                                {{ items }} items, ${{ total }}
+                            {% endblocktranslate %}
                         </a>
                     {% elif not order %}
-                        🛒 Корзина пуста
+                        🛒 {% translate "Your cart is empty" %}
                     {% endif %}
                 {% endwith %}
             </div>
@@ -39,9 +58,11 @@
 
     <footer style="background: var(--bg-header); color: var(--text-secondary); text-align: center; padding: 3rem 0 2rem; margin-top: 4rem; border-top: 1px solid var(--border-color);">
         <div style="max-width: 1400px; margin: 0 auto;">
-            <p style="margin-bottom: 1rem;">&copy; 2024 Snake Paradise. Премиум рептилии для энтузиастов и коллекционеров.</p>
+            <p style="margin-bottom: 1rem;">
+                &copy; 2024 Snake Paradise. {% translate "Premium reptiles for enthusiasts and collectors" %}.
+            </p>
             <p style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color); font-size: 0.9rem;">
-                Безопасная доставка • Экспертный уход • Гарантия качества
+                {% translate "Safe delivery • Expert care • Quality guarantee" %}
             </p>
         </div>
     </footer>

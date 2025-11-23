@@ -1,0 +1,437 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: MyShop 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-11-19 21:26+0500\n"
+"PO-Revision-Date: 2025-11-18 12:00+0500\n"
+"Last-Translator: Your Name <your@email.com>\n"
+"Language-Team: Spanish <es@li.org>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\cart\forms.py:9
+msgid "Количество"
+msgstr ""
+
+#: .\cart\templates\cart\detail.html:5 .\cart\templates\cart\detail.html:10
+msgid "Shopping cart"
+msgstr "Carrito de compras"
+
+# Основные фразы
+#: .\cart\templates\cart\detail.html:5 .\shop\templates\shop\base.html:13
+#: .\shop\templates\shop\product\detail.html:5
+#: .\shop\templates\shop\product\list.html:5
+msgid "Snake Paradise"
+msgstr "Paraíso de Serpientes"
+
+# Carrito
+#: .\cart\templates\cart\detail.html:17
+#: .\payment\templates\payment\process.html:11
+msgid "Image"
+msgstr "Imagen"
+
+#: .\cart\templates\cart\detail.html:18
+#: .\payment\templates\payment\process.html:12
+msgid "Product"
+msgstr "Producto"
+
+#: .\cart\templates\cart\detail.html:19
+#: .\payment\templates\payment\process.html:14
+msgid "Quantity"
+msgstr "Cantidad"
+
+#: .\cart\templates\cart\detail.html:20 .\cart\templates\cart\detail.html:68
+msgid "Remove"
+msgstr "Eliminar"
+
+#: .\cart\templates\cart\detail.html:21
+msgid "Unit price"
+msgstr "Precio unitario"
+
+#: .\cart\templates\cart\detail.html:22
+#: .\payment\templates\payment\process.html:13
+msgid "Price"
+msgstr "Precio"
+
+#: .\cart\templates\cart\detail.html:54
+msgid "Update"
+msgstr "Actualizar"
+
+# General
+#: .\cart\templates\cart\detail.html:83
+#: .\payment\templates\payment\process.html:34
+msgid "Subtotal"
+msgstr "Subtotal"
+
+#: .\cart\templates\cart\detail.html:91
+#, python-format
+msgid ""
+"\n"
+"                            Coupon \"%(code)s\" (%(discount)s%% discount)\n"
+"                        "
+msgstr ""
+
+#: .\cart\templates\cart\detail.html:103
+#: .\payment\templates\payment\process.html:15
+#: .\payment\templates\payment\process.html:54
+msgid "Total"
+msgstr "Total"
+
+#: .\cart\templates\cart\detail.html:124
+msgid "Apply coupon"
+msgstr "Aplicar cupón"
+
+#: .\cart\templates\cart\detail.html:134
+msgid "Apply"
+msgstr "Aplicar"
+
+#: .\cart\templates\cart\detail.html:161
+#: .\shop\templates\shop\product\detail.html:86
+msgid "People who bought this also bought"
+msgstr "La gente que compró esto también compró"
+
+#: .\cart\templates\cart\detail.html:263
+#: .\shop\templates\shop\product\detail.html:57
+#: .\shop\templates\shop\product\list.html:65
+msgid "Add to cart"
+msgstr "Añadir al carrito"
+
+#: .\cart\templates\cart\detail.html:275
+#: .\payment\templates\payment\canceled.html:20
+#: .\payment\templates\payment\completed.html:16
+msgid "Continue shopping"
+msgstr "Continuar comprando"
+
+#: .\cart\templates\cart\detail.html:278
+msgid "Checkout"
+msgstr "Pagar"
+
+#: .\cart\templates\cart\detail.html:292 .\shop\templates\shop\base.html:44
+msgid "Your cart is empty"
+msgstr "Tu carrito está vacío"
+
+# Текст пустой корзины
+#: .\cart\templates\cart\detail.html:295
+msgid "Discover our amazing collection of snakes!"
+msgstr "¡Descubre nuestra increíble colección de serpientes!"
+
+#: .\cart\templates\cart\detail.html:298
+msgid "View catalog"
+msgstr "Ver catálogo"
+
+#: .\cart\templates\cart\detail.html:345
+msgid "Added!"
+msgstr "¡Añadido!"
+
+#: .\coupons\forms.py:6
+msgid "Скидка"
+msgstr ""
+
+#: .\myshop\settings.py:89
+msgid "English"
+msgstr "Inglés"
+
+#: .\myshop\settings.py:90
+msgid "Russian"
+msgstr "Ruso"
+
+#: .\myshop\settings.py:91
+msgid "Spanish"
+msgstr "Español"
+
+#: .\myshop\urls.py:13
+msgid "cart/"
+msgstr ""
+
+#: .\myshop\urls.py:14
+msgid "orders/"
+msgstr ""
+
+#: .\myshop\urls.py:15
+msgid "payment/"
+msgstr ""
+
+# Cupones
+#: .\myshop\urls.py:16
+#, fuzzy
+#| msgid "coupon"
+msgid "coupons/"
+msgstr "cupón"
+
+#: .\payment\templates\payment\canceled.html:4
+msgid "Payment canceled"
+msgstr "Pago cancelado"
+
+#: .\payment\templates\payment\canceled.html:10
+msgid "Your payment has not been processed"
+msgstr "Tu pago no ha sido procesado"
+
+#: .\payment\templates\payment\canceled.html:13
+#, fuzzy
+#| msgid "There was a problem processing your payment"
+msgid "There was a problem processing your payment."
+msgstr "Hubo un problema al procesar tu pago"
+
+#: .\payment\templates\payment\canceled.html:17
+msgid "Back to cart"
+msgstr "Volver al carrito"
+
+#: .\payment\templates\payment\completed.html:4
+msgid "Payment successful"
+msgstr "Pago exitoso"
+
+#: .\payment\templates\payment\completed.html:10
+msgid "Your payment was successful"
+msgstr "Tu pago fue exitoso"
+
+#: .\payment\templates\payment\completed.html:13
+#, fuzzy
+#| msgid "Your payment has been processed successfully"
+msgid "Your payment has been processed successfully."
+msgstr "Tu pago ha sido procesado exitosamente"
+
+# Pagos
+#: .\payment\templates\payment\process.html:4
+msgid "Pay your order"
+msgstr "Pagar tu pedido"
+
+#: .\payment\templates\payment\process.html:7
+msgid "Order summary"
+msgstr "Resumen del pedido"
+
+#: .\payment\templates\payment\process.html:42
+#, python-format
+msgid ""
+"\n"
+"              \"%(code)s\" coupon (%(discount)s%% off)\n"
+"            "
+msgstr ""
+
+#: .\payment\templates\payment\process.html:64
+msgid "Pay now"
+msgstr "Pagar ahora"
+
+#: .\payment\urls.py:9
+msgid "process/"
+msgstr ""
+
+#: .\payment\urls.py:10
+msgid "completed/"
+msgstr ""
+
+#: .\payment\urls.py:11
+#, fuzzy
+#| msgid "Payment canceled"
+msgid "canceled/"
+msgstr "Pago cancelado"
+
+#: .\shop\templates\shop\base.html:7
+msgid "Snake Shop"
+msgstr "Tienda de Serpientes"
+
+#: .\shop\templates\shop\base.html:35
+msgid "Your cart"
+msgstr "Tu carrito"
+
+#: .\shop\templates\shop\base.html:37
+#, python-format
+msgid ""
+"\n"
+"                                %(items)s item, $%(total)s\n"
+"                            "
+msgid_plural ""
+"\n"
+"                                %(items)s items, $%(total)s\n"
+"                            "
+msgstr[0] ""
+msgstr[1] ""
+
+# Футер
+#: .\shop\templates\shop\base.html:62
+msgid "Premium reptiles for enthusiasts and collectors"
+msgstr "Reptiles premium para entusiastas y coleccionistas"
+
+#: .\shop\templates\shop\base.html:65
+msgid "Safe delivery • Expert care • Quality guarantee"
+msgstr "Entrega segura • Cuidado experto • Garantía de calidad"
+
+# Descripciones
+#: .\shop\templates\shop\product\detail.html:39
+msgid "Category"
+msgstr "Categoría"
+
+#: .\shop\templates\shop\product\detail.html:62
+msgid "Description"
+msgstr "Descripción"
+
+#: .\shop\templates\shop\product\list.html:5
+msgid "Premium snakes"
+msgstr "Serpientes premium"
+
+# Категории y filtros
+#: .\shop\templates\shop\product\list.html:11
+msgid "Categories"
+msgstr "Categorías"
+
+#: .\shop\templates\shop\product\list.html:15
+msgid "All snakes"
+msgstr "Todas las serpientes"
+
+#: .\shop\templates\shop\product\list.html:28
+msgid "Care tips"
+msgstr "Consejos de cuidado"
+
+# Текст в сайдбаре
+#: .\shop\templates\shop\product\list.html:30
+msgid ""
+"All our snakes come with detailed care instructions and health guarantee."
+msgstr ""
+"Todas nuestras serpientes vienen con instrucciones detalladas de cuidado y "
+"garantía de salud."
+
+# Заголовки
+#: .\shop\templates\shop\product\list.html:41
+msgid "Premium snake collection"
+msgstr "Colección premium de serpientes"
+
+#: .\shop\templates\shop\product\list.html:46
+#, python-format
+msgid "Explore our selection of %(category_name)s snakes"
+msgstr ""
+
+#: .\shop\templates\shop\product\list.html:48
+msgid "Discover our exclusive collection of healthy and well-cared reptiles"
+msgstr ""
+"Descubre nuestra exclusiva colección de reptiles saludables y bien cuidados"
+
+#: .\shop\templates\shop\product\list.html:70
+msgid "No snakes in this category yet"
+msgstr "Aún no hay serpientes en esta categoría"
+
+#: .\shop\templates\shop\product\list.html:71
+msgid "Check back later - new arrivals coming soon!"
+msgstr "Vuelve más tarde - ¡nuevas llegadas pronto!"
+
+#: .\shop\templates\shop\product\list.html:72
+msgid "View all snakes"
+msgstr "Ver todas las serpientes"
+
+#~ msgid "Order confirmed"
+#~ msgstr "Pedido confirmado"
+
+# Категории из базы данных
+#~ msgid "Snakes"
+#~ msgstr "Serpientes"
+
+#~ msgid "Terrariums"
+#~ msgstr "Terrarios"
+
+#~ msgid "Cart is empty"
+#~ msgstr "El carrito está vacío"
+
+#~ msgid "items"
+#~ msgstr "productos"
+
+#~ msgid "off"
+#~ msgstr "descuento"
+
+# Productos
+#~ msgid "Products"
+#~ msgstr "Productos"
+
+# Pedidos
+#~ msgid "Shipping information"
+#~ msgstr "Información de envío"
+
+#~ msgid "Place order"
+#~ msgstr "Realizar pedido"
+
+#~ msgid "Your order"
+#~ msgstr "Tu pedido"
+
+#~ msgid "Delivery"
+#~ msgstr "Entrega"
+
+#~ msgid "Thermoregulated packaging"
+#~ msgstr "Embalaje termorregulado"
+
+#~ msgid "Next day express delivery"
+#~ msgstr "Entrega exprés al día siguiente"
+
+#~ msgid "Live delivery guarantee"
+#~ msgstr "Garantía de entrega en vivo"
+
+#~ msgid "Veterinary certificate included"
+#~ msgstr "Certificado veterinario incluido"
+
+#~ msgid "Thank you for your order!"
+#~ msgstr "¡Gracias por tu pedido!"
+
+#~ msgid "Your order has been successfully placed and is being processed"
+#~ msgstr "Tu pedido ha sido realizado exitosamente y está siendo procesado"
+
+#~ msgid "Order number"
+#~ msgstr "Número de pedido"
+
+#~ msgid "What happens next?"
+#~ msgstr "¿Qué pasa después?"
+
+#~ msgid "Order confirmation"
+#~ msgstr "Confirmación de pedido"
+
+#~ msgid "You will receive an email confirmation shortly"
+#~ msgstr "Recibirás una confirmación por correo electrónico en breve"
+
+#~ msgid "Preparation for shipping"
+#~ msgstr "Preparación para el envío"
+
+#~ msgid "We will prepare your snake for safe shipping"
+#~ msgstr "Prepararemos tu serpiente para un envío seguro"
+
+#~ msgid "Your order will be shipped by specialized carrier"
+#~ msgstr "Tu pedido será enviado por un transportista especializado"
+
+#~ msgid "Receiving"
+#~ msgstr "Recepción"
+
+#~ msgid "Your new snake will safely arrive at your door"
+#~ msgstr "Tu nueva serpiente llegará de forma segura a tu puerta"
+
+#~ msgid "Have questions about your order?"
+#~ msgstr "¿Tienes preguntas sobre tu pedido?"
+
+#~ msgid "Contact our reptile experts"
+#~ msgstr "Contacta a nuestros expertos en reptiles"
+
+#~ msgid "Home page"
+#~ msgstr "Página principal"
+
+# Factura PDF
+#~ msgid "Invoice no."
+#~ msgstr "Factura no."
+
+#~ msgid "Bill to"
+#~ msgstr "Facturar a"
+
+#~ msgid "Items bought"
+#~ msgstr "Artículos comprados"
+
+#~ msgid "Cost"
+#~ msgstr "Costo"
+
+#~ msgid "PAID"
+#~ msgstr "PAGADO"
+
+#~ msgid "PENDING PAYMENT"
+#~ msgstr "PAGO PENDIENTE"
+
+# Текст доставки
+#~ msgid ""
+#~ "All snakes are delivered by specialized carriers with live delivery "
+#~ "guarantee."
+#~ msgstr ""
+#~ "Todas las serpientes son entregadas por transportistas especializados con "
+#~ "garantía de entrega en vivo."

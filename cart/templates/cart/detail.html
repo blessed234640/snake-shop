@@ -1,23 +1,30 @@
-{% extends "shop/base.html" %} {% load static %} {% block title %} Корзина
-покупок - Snake Paradise {% endblock %} {% block content %}
+{% extends "shop/base.html" %} 
+{% load i18n static %} 
+
+{% block title %}
+  {% translate "Shopping cart" %} - {% translate "Snake Paradise" %}
+{% endblock %} 
+
+{% block content %}
 <div class="cart-container">
-    <h1>🛒 Корзина покупок</h1>
+    <h1>🛒 {% translate "Shopping cart" %}</h1>
 
     {% if cart %}
     <div class="cart">
         <table>
             <thead>
                 <tr>
-                    <th>Изображение</th>
-                    <th>Товар</th>
-                    <th>Количество</th>
-                    <th>Удалить</th>
-                    <th>Цена за шт.</th>
-                    <th>Стоимость</th>
+                    <th>{% translate "Image" %}</th>
+                    <th>{% translate "Product" %}</th>
+                    <th>{% translate "Quantity" %}</th>
+                    <th>{% translate "Remove" %}</th>
+                    <th>{% translate "Unit price" %}</th>
+                    <th>{% translate "Price" %}</th>
                 </tr>
             </thead>
             <tbody>
-                {% for item in cart %} {% with product=item.product %}
+                {% for item in cart %} 
+                {% with product=item.product %}
                 <tr>
                     <td>
                         <a href="{{ product.get_absolute_url }}">
@@ -44,7 +51,7 @@
                             {{ item.update_quantity_form.quantity }}
                             <input
                                 type="submit"
-                                value="Обновить"
+                                value='{% translate "Update" %}'
                                 class="button light"
                                 style="padding: 8px 16px"
                             />
@@ -58,7 +65,7 @@
                         >
                             <input
                                 type="submit"
-                                value="🗑 Удалить"
+                                value='🗑 {% translate "Remove" %}'
                                 class="button"
                                 style="background: #dc3545; padding: 8px 16px"
                             />
@@ -68,9 +75,12 @@
                     <td class="num">₽{{ item.price }}</td>
                     <td class="num">₽{{ item.total_price }}</td>
                 </tr>
-                {% endwith %} {% endfor %} {% if cart.coupon %}
+                {% endwith %} 
+                {% endfor %} 
+                
+                {% if cart.coupon %}
                 <tr class="subtotal">
-                    <td>Промежуточный итог</td>
+                    <td>{% translate "Subtotal" %}</td>
                     <td colspan="4"></td>
                     <td class="num">
                         ₽{{ cart.get_total_price|floatformat:2 }}
@@ -78,7 +88,9 @@
                 </tr>
                 <tr>
                     <td>
-                        Купон"{{cart.coupon.code}}"(скидка{{cart.coupon.discount}}%)
+                        {% blocktranslate with code=cart.coupon.code discount=cart.coupon.discount %}
+                            Coupon "{{ code }}" ({{ discount }}% discount)
+                        {% endblocktranslate %}
                     </td>
                     <td colspan="4"></td>
                     <td class="num neg">
@@ -88,11 +100,9 @@
                 {% endif %}
 
                 <tr class="total">
-                    <td colspan="5"><strong>Итого</strong></td>
+                    <td colspan="5"><strong>{% translate "Total" %}</strong></td>
                     <td class="num">
-                        <strong
-                            >₽{{cart.get_total_price_after_discount|floatformat:2}}</strong
-                        >
+                        <strong>₽{{ cart.get_total_price_after_discount|floatformat:2 }}</strong>
                     </td>
                 </tr>
             </tbody>
@@ -111,7 +121,7 @@
         "
     >
         <h3 style="color: var(--accent-primary); margin-bottom: 1rem">
-            Применить купон:
+            {% translate "Apply coupon" %}:
         </h3>
         <form
             action="{% url 'coupons:apply' %}"
@@ -121,7 +131,7 @@
             {{ coupon_apply_form }}
             <input
                 type="submit"
-                value="Применить"
+                value='{% translate "Apply" %}'
                 class="button light"
                 style="padding: 10px 20px"
             />
@@ -148,7 +158,7 @@
                 text-align: center;
             "
         >
-            🐍 С этим также покупают
+            🐍 {% translate "People who bought this also bought" %}
         </h3>
         <div
             class="recommendations-grid"
@@ -250,7 +260,7 @@
                         onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(0, 212, 170, 0.3)';"
                         onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';"
                     >
-                        + Добавить в корзину
+                        + {% translate "Add to cart" %}
                     </button>
                 </form>
             </div>
@@ -262,10 +272,10 @@
     <!-- Кнопки действий -->
     <div class="cart-actions">
         <a href="{% url 'shop:product_list' %}" class="button light">
-            ← Продолжить покупки
+            ← {% translate "Continue shopping" %}
         </a>
         <a href="{% url 'orders:order_create' %}" class="button">
-            🐍 Оформить заказ →
+            🐍 {% translate "Checkout" %} →
         </a>
     </div>
     {% else %}
@@ -279,13 +289,13 @@
         "
     >
         <h2 style="color: var(--text-secondary); margin-bottom: 1rem">
-            Ваша корзина пуста
+            {% translate "Your cart is empty" %}
         </h2>
         <p style="color: var(--text-secondary); margin-bottom: 2rem">
-            Откройте для себя нашу удивительную коллекцию змей!
+            {% translate "Discover our amazing collection of snakes!" %}
         </p>
         <a href="{% url 'shop:product_list' %}" class="button">
-            Смотреть каталог
+            {% translate "View catalog" %}
         </a>
     </div>
     {% endif %}
@@ -332,7 +342,7 @@
                 const originalText = button.textContent;
 
                 // Визуальная обратная связь
-                button.textContent = "✅ Добавлено!";
+                button.textContent = "✅ {% translate 'Added!' %}";
                 button.style.background = "#28a745";
                 button.disabled = true;
 
