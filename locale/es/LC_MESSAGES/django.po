@@ -1,20 +1,22 @@
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: MyShop 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-19 21:26+0500\n"
-"PO-Revision-Date: 2025-11-18 12:00+0500\n"
-"Last-Translator: Your Name <your@email.com>\n"
+"PO-Revision-Date: 2025-11-23 20:01+0000\n"
+"Last-Translator:   <arturazimov200577@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Translated-Using: django-rosetta 0.10.0\n"
 
 #: .\cart\forms.py:9
 msgid "Количество"
-msgstr ""
+msgstr "Cantidad"
 
 #: .\cart\templates\cart\detail.html:5 .\cart\templates\cart\detail.html:10
 msgid "Shopping cart"
@@ -73,6 +75,8 @@ msgid ""
 "                            Coupon \"%(code)s\" (%(discount)s%% discount)\n"
 "                        "
 msgstr ""
+"\n"
+"Cupón \"%(code)s\" - %(discount)s%% descuento"
 
 #: .\cart\templates\cart\detail.html:103
 #: .\payment\templates\payment\process.html:15
