@@ -9,15 +9,15 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-19 21:26+0500\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2025-11-24 00:30+0000\n"
+"Last-Translator:   <arturazimov200577@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? "
-"1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
+"X-Translated-Using: django-rosetta 0.10.0\n"
 
 #: .\orders\models.py:11
 msgid "first name"
@@ -46,28 +46,28 @@ msgstr "ciudad"
 #: .\orders\templates\orders\order\create.html:5
 #: .\orders\templates\orders\order\create.html:10
 msgid "Checkout"
-msgstr ""
+msgstr "Pago"
 
 #: .\orders\templates\orders\order\create.html:5
 #: .\orders\templates\orders\order\created.html:5
 msgid "Snake Paradise"
-msgstr ""
+msgstr "Paraíso de Serpientes"
 
 #: .\orders\templates\orders\order\create.html:22
 msgid "Shipping information"
-msgstr ""
+msgstr "Información de envío"
 
 #: .\orders\templates\orders\order\create.html:77
 msgid "Back to cart"
-msgstr ""
+msgstr "Volver al carrito"
 
 #: .\orders\templates\orders\order\create.html:81
 msgid "Place order"
-msgstr ""
+msgstr "Hacer pedido"
 
 #: .\orders\templates\orders\order\create.html:99
 msgid "Your order"
-msgstr ""
+msgstr "Tu pedido"
 
 #: .\orders\templates\orders\order\create.html:126
 #, python-format
@@ -76,138 +76,142 @@ msgid ""
 "                            \"%(code)s\" (%(discount)s%% off)\n"
 "                        "
 msgstr ""
+"\n"
+"%(code)s\" (%(discount)s%% de descuento)"
 
 #: .\orders\templates\orders\order\create.html:141
 #: .\orders\templates\orders\order\pdf.html:56
 msgid "Total"
-msgstr ""
+msgstr "Total"
 
 #: .\orders\templates\orders\order\create.html:154
 #: .\orders\templates\orders\order\created.html:43
 msgid "Delivery"
-msgstr ""
+msgstr "Envío"
 
 #: .\orders\templates\orders\order\create.html:163
 msgid ""
 "All snakes are delivered by specialized carriers with live delivery "
 "guarantee."
 msgstr ""
+"Todas las serpientes son entregadas por transportistas especializados con "
+"garantía de entrega en vivo."
 
 #: .\orders\templates\orders\order\create.html:167
 msgid "Thermoregulated packaging"
-msgstr ""
+msgstr "Embalaje termorregulado"
 
 #: .\orders\templates\orders\order\create.html:170
 msgid "Next day express delivery"
-msgstr ""
+msgstr "Entrega exprés al día siguiente"
 
 #: .\orders\templates\orders\order\create.html:173
 msgid "Live delivery guarantee"
-msgstr ""
+msgstr "Garantía de entrega en vivo"
 
 #: .\orders\templates\orders\order\create.html:176
 msgid "Veterinary certificate included"
-msgstr ""
+msgstr "Certificado veterinario incluido"
 
 #: .\orders\templates\orders\order\created.html:5
 msgid "Order confirmed"
-msgstr ""
+msgstr "Pedido confirmado"
 
 #: .\orders\templates\orders\order\created.html:12
 msgid "Thank you for your order!"
-msgstr ""
+msgstr "¡Gracias por tu pedido!"
 
 #: .\orders\templates\orders\order\created.html:15
 msgid "Your order has been successfully placed and is being processed."
-msgstr ""
+msgstr "Tu pedido ha sido realizado con éxito y está siendo procesado."
 
 #: .\orders\templates\orders\order\created.html:18
 msgid "Order number"
-msgstr ""
+msgstr "Número de pedido"
 
 #: .\orders\templates\orders\order\created.html:24
 msgid "What happens next?"
-msgstr ""
+msgstr "¿Qué pasa ahora?"
 
 #: .\orders\templates\orders\order\created.html:29
 msgid "Order confirmation"
-msgstr ""
+msgstr "Confirmación de pedido"
 
 #: .\orders\templates\orders\order\created.html:30
 msgid "You will receive an email confirmation shortly"
-msgstr ""
+msgstr "Recibirás una confirmación por correo electrónico shortly"
 
 #: .\orders\templates\orders\order\created.html:36
 msgid "Preparation for shipping"
-msgstr ""
+msgstr "Preparación para envío"
 
 #: .\orders\templates\orders\order\created.html:37
 msgid "We will prepare your snake for safe shipping"
-msgstr ""
+msgstr "Prepararemos tu serpiente para un envío seguro"
 
 #: .\orders\templates\orders\order\created.html:44
 msgid "Your order will be shipped by specialized carrier"
-msgstr ""
+msgstr "Tu pedido será enviado por un transportista especializado"
 
 #: .\orders\templates\orders\order\created.html:50
 msgid "Receiving"
-msgstr ""
+msgstr "Recepción"
 
 #: .\orders\templates\orders\order\created.html:51
 msgid "Your new snake will safely arrive at your door"
-msgstr ""
+msgstr "Tu nueva serpiente llegará safely a tu puerta"
 
 #: .\orders\templates\orders\order\created.html:58
 msgid "Have questions about your order?"
-msgstr ""
+msgstr "¿Tienes preguntas sobre tu pedido?"
 
 #: .\orders\templates\orders\order\created.html:60
 msgid "Contact our reptile experts:"
-msgstr ""
+msgstr "Contacta a nuestros expertos en reptiles:"
 
 #: .\orders\templates\orders\order\created.html:67
 msgid "Continue shopping"
-msgstr ""
+msgstr "Continuar comprando"
 
 #: .\orders\templates\orders\order\created.html:70
 msgid "Home page"
-msgstr ""
+msgstr "Página de inicio"
 
 #: .\orders\templates\orders\order\pdf.html:4
 msgid "Snake Shop"
-msgstr ""
+msgstr "Tienda de Serpientes"
 
 #: .\orders\templates\orders\order\pdf.html:6
 msgid "Invoice no."
-msgstr ""
+msgstr "Factura nº"
 
 #: .\orders\templates\orders\order\pdf.html:11
 msgid "Bill to"
-msgstr ""
+msgstr "Facturar a"
 
 #: .\orders\templates\orders\order\pdf.html:18
 msgid "Items bought"
-msgstr ""
+msgstr "Artículos comprados"
 
 #: .\orders\templates\orders\order\pdf.html:22
 msgid "Product"
-msgstr ""
+msgstr "Producto"
 
 #: .\orders\templates\orders\order\pdf.html:23
 msgid "Price"
-msgstr ""
+msgstr "Precio"
 
 #: .\orders\templates\orders\order\pdf.html:24
 msgid "Quantity"
-msgstr ""
+msgstr "Cantidad"
 
 #: .\orders\templates\orders\order\pdf.html:25
 msgid "Cost"
-msgstr ""
+msgstr "Costo"
 
 #: .\orders\templates\orders\order\pdf.html:39
 msgid "Subtotal"
-msgstr ""
+msgstr "Subtotal"
 
 #: .\orders\templates\orders\order\pdf.html:46
 #, python-format
@@ -216,15 +220,17 @@ msgid ""
 "                \"%(code)s\" (%(discount)s%% off)\n"
 "            "
 msgstr ""
+"\n"
+"\"%(code)s\" (%(discount)s%% de descuento)"
 
 #: .\orders\templates\orders\order\pdf.html:63
 msgid "PAID"
-msgstr ""
+msgstr "PAGADO"
 
 #: .\orders\templates\orders\order\pdf.html:63
 msgid "PENDING PAYMENT"
-msgstr ""
+msgstr "PAGO PENDIENTE"
 
 #: .\orders\urls.py:10
 msgid "create/"
-msgstr ""
+msgstr "crear/"

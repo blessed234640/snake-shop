@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: MyShop 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-19 21:26+0500\n"
-"PO-Revision-Date: 2025-11-23 20:01+0000\n"
+"PO-Revision-Date: 2025-11-23 20:14+0000\n"
 "Last-Translator:   <arturazimov200577@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "Language: es\n"
@@ -132,7 +132,7 @@ msgstr "¡Añadido!"
 
 #: .\coupons\forms.py:6
 msgid "Скидка"
-msgstr ""
+msgstr "Descuento\t"
 
 #: .\myshop\settings.py:89
 msgid "English"
@@ -148,19 +148,18 @@ msgstr "Español"
 
 #: .\myshop\urls.py:13
 msgid "cart/"
-msgstr ""
+msgstr "carrito/"
 
 #: .\myshop\urls.py:14
 msgid "orders/"
-msgstr ""
+msgstr "pedidos/"
 
 #: .\myshop\urls.py:15
 msgid "payment/"
-msgstr ""
+msgstr "pago/"
 
 # Cupones
 #: .\myshop\urls.py:16
-#, fuzzy
 #| msgid "coupon"
 msgid "coupons/"
 msgstr "cupón"
@@ -174,10 +173,9 @@ msgid "Your payment has not been processed"
 msgstr "Tu pago no ha sido procesado"
 
 #: .\payment\templates\payment\canceled.html:13
-#, fuzzy
 #| msgid "There was a problem processing your payment"
 msgid "There was a problem processing your payment."
-msgstr "Hubo un problema al procesar tu pago"
+msgstr "Hubo un problema al procesar tu pago."
 
 #: .\payment\templates\payment\canceled.html:17
 msgid "Back to cart"
@@ -192,10 +190,9 @@ msgid "Your payment was successful"
 msgstr "Tu pago fue exitoso"
 
 #: .\payment\templates\payment\completed.html:13
-#, fuzzy
 #| msgid "Your payment has been processed successfully"
 msgid "Your payment has been processed successfully."
-msgstr "Tu pago ha sido procesado exitosamente"
+msgstr "El pago se ha realizado con éxito."
 
 # Pagos
 #: .\payment\templates\payment\process.html:4
@@ -213,6 +210,8 @@ msgid ""
 "              \"%(code)s\" coupon (%(discount)s%% off)\n"
 "            "
 msgstr ""
+"\n"
+"Cupón \"%(code)s\" (%(discount)s%% de descuento)"
 
 #: .\payment\templates\payment\process.html:64
 msgid "Pay now"
@@ -220,17 +219,16 @@ msgstr "Pagar ahora"
 
 #: .\payment\urls.py:9
 msgid "process/"
-msgstr ""
+msgstr "proceso/"
 
 #: .\payment\urls.py:10
 msgid "completed/"
-msgstr ""
+msgstr "completado/"
 
 #: .\payment\urls.py:11
-#, fuzzy
 #| msgid "Payment canceled"
 msgid "canceled/"
-msgstr "Pago cancelado"
+msgstr "cancelado/"
 
 #: .\shop\templates\shop\base.html:7
 msgid "Snake Shop"
@@ -251,7 +249,11 @@ msgid_plural ""
 "                                %(items)s items, $%(total)s\n"
 "                            "
 msgstr[0] ""
+"\n"
+"%(items)s artículo, $%(total)s"
 msgstr[1] ""
+"\n"
+"%(items)s artículos, $%(total)s"
 
 # Футер
 #: .\shop\templates\shop\base.html:62
@@ -304,7 +306,7 @@ msgstr "Colección premium de serpientes"
 #: .\shop\templates\shop\product\list.html:46
 #, python-format
 msgid "Explore our selection of %(category_name)s snakes"
-msgstr ""
+msgstr "Explora nuestra selección de serpientes %(category_name)s"
 
 #: .\shop\templates\shop\product\list.html:48
 msgid "Discover our exclusive collection of healthy and well-cared reptiles"

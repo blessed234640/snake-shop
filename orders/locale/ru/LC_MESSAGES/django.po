@@ -9,16 +9,15 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-19 21:26+0500\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2025-11-24 00:41+0000\n"
+"Last-Translator:   <arturazimov200577@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
-"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
+"X-Translated-Using: django-rosetta 0.10.0\n"
 
 #: .\orders\models.py:11
 msgid "first name"
@@ -47,28 +46,28 @@ msgstr "город"
 #: .\orders\templates\orders\order\create.html:5
 #: .\orders\templates\orders\order\create.html:10
 msgid "Checkout"
-msgstr ""
+msgstr "Оформление заказа"
 
 #: .\orders\templates\orders\order\create.html:5
 #: .\orders\templates\orders\order\created.html:5
 msgid "Snake Paradise"
-msgstr ""
+msgstr "Змеиный Рай"
 
 #: .\orders\templates\orders\order\create.html:22
 msgid "Shipping information"
-msgstr ""
+msgstr "Информация о доставке"
 
 #: .\orders\templates\orders\order\create.html:77
 msgid "Back to cart"
-msgstr ""
+msgstr "Назад в корзину"
 
 #: .\orders\templates\orders\order\create.html:81
 msgid "Place order"
-msgstr ""
+msgstr "Разместить заказ"
 
 #: .\orders\templates\orders\order\create.html:99
 msgid "Your order"
-msgstr ""
+msgstr "Ваш заказ"
 
 #: .\orders\templates\orders\order\create.html:126
 #, python-format
@@ -77,138 +76,142 @@ msgid ""
 "                            \"%(code)s\" (%(discount)s%% off)\n"
 "                        "
 msgstr ""
+"\n"
+"\"%(code)s\" (скидка %(discount)s%%)"
 
 #: .\orders\templates\orders\order\create.html:141
 #: .\orders\templates\orders\order\pdf.html:56
 msgid "Total"
-msgstr ""
+msgstr "Итого"
 
 #: .\orders\templates\orders\order\create.html:154
 #: .\orders\templates\orders\order\created.html:43
 msgid "Delivery"
-msgstr ""
+msgstr "Доставка"
 
 #: .\orders\templates\orders\order\create.html:163
 msgid ""
 "All snakes are delivered by specialized carriers with live delivery "
 "guarantee."
 msgstr ""
+"Все змеи доставляются специализированными перевозчиками с гарантией живой "
+"доставки."
 
 #: .\orders\templates\orders\order\create.html:167
 msgid "Thermoregulated packaging"
-msgstr ""
+msgstr "Терморегулируемая упаковка"
 
 #: .\orders\templates\orders\order\create.html:170
 msgid "Next day express delivery"
-msgstr ""
+msgstr "Экспресс-доставка на следующий день"
 
 #: .\orders\templates\orders\order\create.html:173
 msgid "Live delivery guarantee"
-msgstr ""
+msgstr "Гарантия живой доставки"
 
 #: .\orders\templates\orders\order\create.html:176
 msgid "Veterinary certificate included"
-msgstr ""
+msgstr "Ветеринарный сертификат включен"
 
 #: .\orders\templates\orders\order\created.html:5
 msgid "Order confirmed"
-msgstr ""
+msgstr "Заказ подтвержден"
 
 #: .\orders\templates\orders\order\created.html:12
 msgid "Thank you for your order!"
-msgstr ""
+msgstr "Спасибо за ваш заказ!"
 
 #: .\orders\templates\orders\order\created.html:15
 msgid "Your order has been successfully placed and is being processed."
-msgstr ""
+msgstr "Ваш заказ успешно размещен и обрабатывается."
 
 #: .\orders\templates\orders\order\created.html:18
 msgid "Order number"
-msgstr ""
+msgstr "Номер заказа"
 
 #: .\orders\templates\orders\order\created.html:24
 msgid "What happens next?"
-msgstr ""
+msgstr "Что будет дальше?"
 
 #: .\orders\templates\orders\order\created.html:29
 msgid "Order confirmation"
-msgstr ""
+msgstr "Подтверждение заказа"
 
 #: .\orders\templates\orders\order\created.html:30
 msgid "You will receive an email confirmation shortly"
-msgstr ""
+msgstr "Вскоре вы получите подтверждение по электронной почте"
 
 #: .\orders\templates\orders\order\created.html:36
 msgid "Preparation for shipping"
-msgstr ""
+msgstr "Подготовка к отправке"
 
 #: .\orders\templates\orders\order\created.html:37
 msgid "We will prepare your snake for safe shipping"
-msgstr ""
+msgstr "Мы подготовим вашу змею к безопасной отправке"
 
 #: .\orders\templates\orders\order\created.html:44
 msgid "Your order will be shipped by specialized carrier"
-msgstr ""
+msgstr "Ваш заказ будет отправлен специализированным перевозчиком"
 
 #: .\orders\templates\orders\order\created.html:50
 msgid "Receiving"
-msgstr ""
+msgstr "Получение"
 
 #: .\orders\templates\orders\order\created.html:51
 msgid "Your new snake will safely arrive at your door"
-msgstr ""
+msgstr "Ваша новая змея благополучно прибудет к вашей двери"
 
 #: .\orders\templates\orders\order\created.html:58
 msgid "Have questions about your order?"
-msgstr ""
+msgstr "Есть вопросы о вашем заказе?"
 
 #: .\orders\templates\orders\order\created.html:60
 msgid "Contact our reptile experts:"
-msgstr ""
+msgstr "Свяжитесь с нашими экспертами по рептилиям:"
 
 #: .\orders\templates\orders\order\created.html:67
 msgid "Continue shopping"
-msgstr ""
+msgstr "Продолжить покупки"
 
 #: .\orders\templates\orders\order\created.html:70
 msgid "Home page"
-msgstr ""
+msgstr "Главная страница"
 
 #: .\orders\templates\orders\order\pdf.html:4
 msgid "Snake Shop"
-msgstr ""
+msgstr "Магазин Змей"
 
 #: .\orders\templates\orders\order\pdf.html:6
 msgid "Invoice no."
-msgstr ""
+msgstr "Счет №"
 
 #: .\orders\templates\orders\order\pdf.html:11
 msgid "Bill to"
-msgstr ""
+msgstr "Плательщик"
 
 #: .\orders\templates\orders\order\pdf.html:18
 msgid "Items bought"
-msgstr ""
+msgstr "Купленные товары"
 
 #: .\orders\templates\orders\order\pdf.html:22
 msgid "Product"
-msgstr ""
+msgstr "Товар"
 
 #: .\orders\templates\orders\order\pdf.html:23
 msgid "Price"
-msgstr ""
+msgstr "Цена"
 
 #: .\orders\templates\orders\order\pdf.html:24
 msgid "Quantity"
-msgstr ""
+msgstr "Количество "
 
 #: .\orders\templates\orders\order\pdf.html:25
 msgid "Cost"
-msgstr ""
+msgstr "Стоимость"
 
 #: .\orders\templates\orders\order\pdf.html:39
 msgid "Subtotal"
-msgstr ""
+msgstr "Промежуточный итог"
 
 #: .\orders\templates\orders\order\pdf.html:46
 #, python-format
@@ -217,15 +220,17 @@ msgid ""
 "                \"%(code)s\" (%(discount)s%% off)\n"
 "            "
 msgstr ""
+"\n"
+"\"%(code)s\" (скидка %(discount)s%%)"
 
 #: .\orders\templates\orders\order\pdf.html:63
 msgid "PAID"
-msgstr ""
+msgstr "ОПЛАЧЕНО"
 
 #: .\orders\templates\orders\order\pdf.html:63
 msgid "PENDING PAYMENT"
-msgstr ""
+msgstr "ОЖИДАЕТ ОПЛАТЫ"
 
 #: .\orders\urls.py:10
 msgid "create/"
-msgstr ""
+msgstr "создать/"
