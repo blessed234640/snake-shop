@@ -32,6 +32,14 @@ def payment_process(request):
         }
         stripe_locale = language_map.get(current_language, "auto")
 
+        # Получаем валюту из заказа и конвертируем для Stripe
+        currency_mapping = {
+            'USD': 'usd',
+            'EUR': 'eur', 
+            'RUB': 'rub'
+        }
+        stripe_currency = currency_mapping.get(order.currency, 'usd')
+
         # Базовые данные сессии
         session_data = {
             "mode": "payment",
@@ -44,13 +52,19 @@ def payment_process(request):
             "line_items": [],
         }
 
-        # Добавляем товары заказа
+        # Добавляем товары заказа с правильной валютой
         for item in order.items.all():
+            # Конвертируем цену в минимальные единицы валюты (центы/копейки)
+            if stripe_currency == 'rub':
+                unit_amount = int(item.price * 100)  # рубли в копейки
+            else:
+                unit_amount = int(item.price * 100)  # доллары/евро в центы
+
             session_data["line_items"].append(
                 {
                     "price_data": {
-                        "unit_amount": int(item.price * 100),  # Цена в центах
-                        "currency": "usd",
+                        "unit_amount": unit_amount,
+                        "currency": stripe_currency,  # Используем валюту из заказа
                         "product_data": {
                             "name": item.product.name,
                             # Можно добавить изображение товара
@@ -64,12 +78,12 @@ def payment_process(request):
         # Обработка купонов для Stripe
         if order.coupon:
             try:
-                # Создаем купон в Stripe
+                # Создаем купон в Stripe с правильной валютой
                 stripe_coupon = stripe.Coupon.create(
                     name=order.coupon.code,
                     percent_off=order.discount,
                     duration="once",
-                    currency="usd",  # Указываем валюту для купона
+                    currency=stripe_currency,  # Используем валюту из заказа
                 )
                 session_data["discounts"] = [{"coupon": stripe_coupon.id}]
             except stripe.error.StripeError as e:

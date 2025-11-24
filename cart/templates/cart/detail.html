@@ -1,5 +1,5 @@
 {% extends "shop/base.html" %} 
-{% load i18n static %} 
+{% load i18n static currency_tags %}
 
 {% block title %}
   {% translate "Shopping cart" %} - {% translate "Snake Paradise" %}
@@ -72,8 +72,8 @@
                             {% csrf_token %}
                         </form>
                     </td>
-                    <td class="num">₽{{ item.price }}</td>
-                    <td class="num">₽{{ item.total_price }}</td>
+                    <td class="num">{{ item.price|currency }}</td>
+                    <td class="num">{{ item.total_price|currency }}</td>
                 </tr>
                 {% endwith %} 
                 {% endfor %} 
@@ -83,7 +83,7 @@
                     <td>{% translate "Subtotal" %}</td>
                     <td colspan="4"></td>
                     <td class="num">
-                        ₽{{ cart.get_total_price|floatformat:2 }}
+                        {{ cart.get_total_price|currency }}
                     </td>
                 </tr>
                 <tr>
@@ -94,7 +94,7 @@
                     </td>
                     <td colspan="4"></td>
                     <td class="num neg">
-                        - ₽{{ cart.get_discount|floatformat:2 }}
+                        - {{ cart.get_discount|currency }}
                     </td>
                 </tr>
                 {% endif %}
@@ -102,7 +102,7 @@
                 <tr class="total">
                     <td colspan="5"><strong>{% translate "Total" %}</strong></td>
                     <td class="num">
-                        <strong>₽{{ cart.get_total_price_after_discount|floatformat:2 }}</strong>
+                        <strong>{{ cart.get_total_price_after_discount|currency }}</strong>
                     </td>
                 </tr>
             </tbody>
@@ -222,15 +222,8 @@
                     >
                         {{ p.name }}
                     </p>
-                    <p
-                        style="
-                            color: var(--accent-primary);
-                            font-weight: 600;
-                            margin: 0.5rem 0;
-                            font-size: 1.1rem;
-                        "
-                    >
-                        ₽{{ p.price }}
+                    <p style="color: var(--accent-primary); font-weight: 600; margin: 0.5rem 0; font-size: 1.1rem;">
+                        {{ p.price|currency }}
                     </p>
                 </a>
                 <!-- Форма для добавления в корзину -->

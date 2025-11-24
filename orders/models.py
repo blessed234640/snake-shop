@@ -24,6 +24,10 @@ class Order(models.Model):
     discount = models.IntegerField(
         default=0, validators=[MinValueValidator(0), MaxValueValidator(100)]
     )
+# ДОБАВИТЬ ЭТИ ПОЛЯ ДЛЯ МУЛЬТИВАЛЮТНОСТИ
+    currency = models.CharField(max_length=3, default='USD')
+    exchange_rate = models.DecimalField(max_digits=10, decimal_places=4, default=1.0)
+    original_total = models.DecimalField(max_digits=10, decimal_places=2, default=0)  # В базовой валюте (USD)
 
     class Meta:
         ordering = ["-created"]
@@ -46,18 +50,34 @@ class Order(models.Model):
     def get_total_cost(self):
         total_cost = self.get_total_cost_before_discount()
         return total_cost - self.get_discount()
+    
+    # ДОБАВИТЬ МЕТОДЫ ДЛЯ ВАЛЮТ
+    def get_total_in_original_currency(self):
+        """Возвращает стоимость в базовой валюте (USD)"""
+        return self.original_total
+    
+    def format_price(self, price):
+        """Форматирует цену согласно валюте заказа"""
+        if self.currency == 'RUB':
+            return f"{price:,.2f} {self.get_currency_symbol()}".replace(',', ' ').replace('.', ',')
+        elif self.currency == 'EUR':
+            return f"{self.get_currency_symbol()}{price:,.2f}"
+        else:  # USD
+            return f"{self.get_currency_symbol()}{price:,.2f}"
+    
+    def get_currency_symbol(self):
+        """Возвращает символ валюты"""
+        symbols = {'USD': '$', 'EUR': '€', 'RUB': '₽'}
+        return symbols.get(self.currency, '$')
 
     def get_stripe_url(self):
         if not self.stripe_id:
-            # никаких ассоциированных платежей
             return ""
         if "_test_" in settings.STRIPE_SECRET_KEY:
-            # путь stripe для тестовых платежей
             path = "/test/"
         else:
-            # Путь Stripr для настоящих платежей
             path = "/"
-            return f"https://dashboard.stripe.com{path}payments/{self.stripe_id}"
+        return f"https://dashboard.stripe.com{path}payments/{self.stripe_id}"
 
 
 class OrderItem(models.Model):

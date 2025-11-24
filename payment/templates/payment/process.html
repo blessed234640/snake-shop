@@ -1,5 +1,5 @@
 {% extends "shop/base.html" %}
-{% load i18n static %}
+{% load i18n static currency_tags %}
 
 {% block title %}{% translate "Pay your order" %}{% endblock %}
 
@@ -23,9 +23,9 @@
             {% else %}{% static "img/no_image.png" %}{% endif %}">
           </td>
           <td>{{ item.product.name }}</td>
-          <td class="num">₽{{ item.price }}</td>
+          <td class="num">{{ item.price|currency }}</td>
           <td class="num">{{ item.quantity }}</td>
-          <td class="num">₽{{ item.get_cost }}</td>
+          <td class="num">{{ item.get_cost|currency }}</td>
         </tr>
       {% endfor %}
       
@@ -34,7 +34,7 @@
           <td>{% translate "Subtotal" %}</td>
           <td colspan="3"></td>
           <td class="num">
-            ₽{{ order.get_total_cost_before_discount|floatformat:2 }}
+            {{ order.get_total_cost_before_discount|currency }}
           </td>
         </tr>
         <tr>
@@ -45,7 +45,7 @@
           </td>
           <td colspan="3"></td>
           <td class="num neg">
-            - ₽{{ order.get_discount|floatformat:2 }}
+            - {{ order.get_discount|currency }}
           </td>
         </tr>
       {% endif %}
@@ -54,7 +54,7 @@
         <td>{% translate "Total" %}</td>
         <td colspan="3"></td>
         <td class="num">
-          ₽{{ order.get_total_cost|floatformat:2 }}
+          {{ order.get_total_cost|currency }}
         </td>
       </tr>
     </tbody>

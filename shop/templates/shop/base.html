@@ -1,4 +1,6 @@
 {% load i18n static %}
+{% load currency_tags %}
+
 <!DOCTYPE html>
 <html lang="{{ request.LANGUAGE_CODE }}">
 <head>
@@ -16,6 +18,7 @@
             <div style="margin-right: 20px;">
                 <form action="{% url 'set_language' %}" method="post">
                     {% csrf_token %}
+                    <input name="next" type="hidden" id="next-input" />
                     <select name="language" onchange="this.form.submit()" style="padding: 5px; border-radius: 4px; border: 1px solid #ccc;">
                         {% get_current_language as LANGUAGE_CODE %}
                         {% get_available_languages as LANGUAGES %}
@@ -27,17 +30,16 @@
                     </select>
                 </form>
             </div>
-
             <!-- Корзина перемещена в правый верхний угол -->
             <div class="cart-header">
                 {% with total_items=cart|length %}
                     {% if total_items > 0 %}
                         🛒 {% translate "Your cart" %}:
                         <a href="{% url 'cart:cart_detail' %}">
-                            {% blocktranslate with total=cart.get_total_price count items=total_items %}
-                                {{ items }} item, ${{ total }}
+                            {% blocktranslate with total=cart.get_total_price|currency count items=total_items %}
+                                {{ items }} item, {{ total }}
                             {% plural %}
-                                {{ items }} items, ${{ total }}
+                                {{ items }} items, {{ total }}
                             {% endblocktranslate %}
                         </a>
                     {% elif not order %}

@@ -1,6 +1,6 @@
 {% extends "shop/base.html" %} 
 {% load i18n %} 
-
+{% load i18n currency_tags %}
 {% block title %}
   {% translate "Checkout" %} - {% translate "Snake Paradise" %}
 {% endblock %} 
@@ -117,7 +117,7 @@
                             </span>
                         </div>
                         <span style="font-weight: 600">
-                            ₽{{ item.total_price }}
+                            {{ item.total_price|currency }}
                         </span>
                     </div>
                     {% endfor %}
@@ -126,8 +126,7 @@
                         {% blocktranslate with code=cart.coupon.code discount=cart.coupon.discount %}
                             "{{ code }}" ({{ discount }}% off)
                         {% endblocktranslate %}
-                        <span class="neg">- ₽{{ cart.get_discount|floatformat:2 }}</span>
-                    </li>
+                        <span class="neg">- {{ cart.get_discount|currency }}</span>                    </li>
                     {% endif %}
                 </div>
                 <div
@@ -138,7 +137,7 @@
                         font-size: 1.2rem;
                     "
                 >
-                    <strong>{% translate "Total" %}: ₽{{ cart.get_total_price_after_discount|floatformat:2 }}</strong>
+                    <strong>{% translate "Total" %}: {{ cart.get_total_price_after_discount|currency }}</strong>
                 </div>
             </div>
 

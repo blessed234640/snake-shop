@@ -1,5 +1,6 @@
 {% extends "shop/base.html" %}
 {% load i18n static %}
+{% load currency_tags %}
 
 {% block title %}
     {% if category %}
@@ -66,7 +67,7 @@
                     />
                     <h3 class="product-name">{{ product.name }}</h3>
                 </a>
-                <div class="price">₽{{ product.price }}</div>
+                <div class="price">{{ product.price|currency }}</div>
                 <form action="{% url 'cart:cart_add' product.id %}" method="post">
                     {{ cart_product_form }}
                     {% csrf_token %}
@@ -86,6 +87,15 @@
                 <a href="{% url 'shop:product_list' %}" class="button">
                     {% translate "View all snakes" %}
                 </a>
+            </div>
+            <!-- Временно добавьте этот блок в product-list.html -->
+            <div style="background: #f0f0f0; padding: 10px; margin: 10px 0; border: 1px solid #ccc;">
+                <strong>DEBUG Price Information:</strong><br>
+                Product: {{ product.name }}<br>
+                Original Price: {{ product.price }}<br>
+                Currency Filter Result: {{ product.price|currency }}<br>
+                Current Language: {{ request.LANGUAGE_CODE }}<br>
+                Currency Rate: {% get_current_language as LANGUAGE_CODE %}{{ CURRENCIES.LANGUAGE_CODE.rate }}
             </div>
             {% endfor %}
         </div>

@@ -1,4 +1,6 @@
 {% load i18n %}
+{% load i18n currency_tags %}
+
 <html>
 <body>
   <h1>{% translate "Snake Shop" %}</h1>
@@ -29,17 +31,16 @@
       {% for item in order.items.all %}
         <tr class="row{% cycle "1" "2" %}">
           <td>{{ item.product.name }}</td>
-          <td class="num">₽{{ item.price }}</td>
+          <td class="num">{{ item.price|currency }}</td>
           <td class="num">{{ item.quantity }}</td>
-          <td class="num">₽{{ item.get_cost }}</td>
+          <td class="num">{{ item.get_cost|currency }}</td>
         </tr>
       {% endfor %}
       {% if order.coupon %}
         <tr class="subtotal">
         <td colspan="3">{% translate "Subtotal" %}</td>
         <td class="num">
-            ₽{{ order.get_total_cost_before_discount|floatformat:2 }}
-        </td>
+            {{ order.get_total_cost_before_discount|currency }}        </td>
         </tr>
         <tr>
         <td colspan="3">
@@ -48,13 +49,13 @@
             {% endblocktranslate %}
         </td>
         <td class="num neg">
-            - ₽{{ order.get_discount|floatformat:2 }}
+            - {{ order.get_discount|currency }}
         </td>
         </tr>
         {% endif %}
       <tr class="total">
         <td colspan="3">{% translate "Total" %}</td>
-        <td class="num">₽{{ order.get_total_cost|floatformat:2 }}</td>
+        <td class="num">{{ order.get_total_cost|currency }}</td>
       </tr>
     </tbody>
   </table>

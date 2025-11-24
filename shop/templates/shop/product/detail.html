@@ -1,5 +1,6 @@
 {% extends "shop/base.html" %} 
 {% load i18n static %} 
+{% load currency_tags %}
 
 {% block title %}
   {{ product.name }} - {% translate "Snake Paradise" %}
@@ -45,7 +46,7 @@
             </a>
         </h2>
 
-        <div class="price">₽{{ product.price }}</div>
+        <div class="price">{{ product.price|currency }}</div>
 
         <form
             action="{% url 'cart:cart_add' product.id %}"
@@ -142,15 +143,8 @@
                         >
                             {{ p.name }}
                         </p>
-                        <p
-                            style="
-                                color: var(--accent-primary);
-                                font-weight: 600;
-                                margin: 0.3rem 0 0;
-                                font-size: 0.9rem;
-                            "
-                        >
-                            ₽{{ p.price }}
+                        <p style="color: var(--accent-primary); font-weight: 600; margin: 0.3rem 0 0; font-size: 0.9rem;">
+                            {{ p.price|currency }}
                         </p>
                     </a>
                 </div>

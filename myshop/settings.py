@@ -130,3 +130,8 @@ PARLER_LANGUAGES = {
         "hide_untraslated": False,
     },
 }
+CURRENCIES = {
+    'en': {'code': 'USD', 'symbol': '$', 'rate': 0.012, 'stripe_currency': 'usd'},    # 1 RUB = 0.012 USD
+    'es': {'code': 'EUR', 'symbol': '€', 'rate': 0.011, 'stripe_currency': 'eur'},    # 1 RUB = 0.011 EUR
+    'ru': {'code': 'RUB', 'symbol': '₽', 'rate': 1.0, 'stripe_currency': 'rub'},      # 1 RUB = 1.0 RUB
+}

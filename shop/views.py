@@ -4,11 +4,17 @@ from django.shortcuts import get_object_or_404, render
 from .models import Category, Product
 from .recommender import Recommender
 
-
 def product_list(request, category_slug=None):
     category = None
     categories = Category.objects.all()
     products = Product.objects.filter(available=True)
+    
+    # 🔴 ОТЛАДКА
+    if products:
+        first_product = products[0]
+        print(f"🔴 VIEW - Product: {first_product}, Price: {first_product.price}")
+        print(f"🔴 VIEW - Language: {request.LANGUAGE_CODE}")
+    
     if category_slug:
         language = request.LANGUAGE_CODE
         category = get_object_or_404(
@@ -17,6 +23,8 @@ def product_list(request, category_slug=None):
             translations__slug=category_slug,
         )
         products = products.filter(category=category)
+    
+    # 🔴 ВАЖНО: УБЕДИТЕСЬ ЧТО ЕСТЬ RETURN
     return render(
         request,
         "shop/product/list.html",
@@ -26,7 +34,6 @@ def product_list(request, category_slug=None):
             "products": products,
         },
     )
-
 
 def product_detail(request, id, slug):
     language = request.LANGUAGE_CODE
