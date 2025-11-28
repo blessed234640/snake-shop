@@ -1,0 +1,28 @@
+{% extends "shop/base.html" %}
+{% load i18n static currency_tags %}
+
+{% block title %}{% translate "Search results" %}{% endblock %}
+
+{% block content %}
+  <h1>{% translate "Search results" %}</h1>
+
+  {% if query %}
+    <p>{% blocktranslate with query=query %}Search results for "{{ query }}"{% endblocktranslate %}</p>
+  {% endif %}
+
+  {% if products %}
+    <div class="product-list">
+      {% for product in products %}
+        <div class="item">
+          <a href="{{ product.get_absolute_url }}">
+            <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
+          </a>
+          <a href="{{ product.get_absolute_url }}">{{ product.name }}</a><br>
+          {{ product.price|currency }}
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>{% translate "No products found" %}</p>
+  {% endif %}
+{% endblock %}

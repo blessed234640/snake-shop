@@ -122,3 +122,26 @@ class Cart:
     def get_stripe_currency(self):
         """Возвращает валюту для Stripe"""
         return self.get_currency_info()['stripe_currency']
+    
+    def get_total_weight(self):
+        """Возвращает общий вес корзины в граммах"""
+        total_weight = Decimal('0')
+        for item in self:
+            product = item['product']
+            quantity = item['quantity']
+            total_weight += product.weight * quantity
+        return total_weight
+
+    def calculate_shipping_cost_base(self):
+        """Рассчитывает стоимость доставки в базовой валюте (рублях)"""
+        total_weight = self.get_total_weight()
+        
+        # Тарифы доставки в РУБЛЯХ
+        if total_weight <= 1000:  # до 1 кг
+            return Decimal('500.00')
+        elif total_weight <= 5000:  # до 5 кг
+            return Decimal('800.00')
+        elif total_weight <= 10000:  # до 10 кг
+            return Decimal('1200.00')
+        else:  # свыше 10 кг
+            return Decimal('1200.00') + (total_weight - 10000) / 1000 * Decimal('100.00')

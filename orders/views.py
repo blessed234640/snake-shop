@@ -21,26 +21,60 @@ def order_create(request):
         if form.is_valid():
             order = form.save(commit=False)
             
-            # ДОБАВЬТЕ ЭТОТ КОД - сохраняем валюту заказа
             currency_info = cart.get_currency_info()
             order.currency = currency_info['code']
             order.exchange_rate = Decimal(str(currency_info['rate']))
             
+            # ОТЛАДКА
+            print(f"🔍 DEBUG: Cart total = {cart.get_total_price_after_discount()}")
+            print(f"🔍 DEBUG: Currency = {order.currency}, Rate = {order.exchange_rate}")
+            
+            # Рассчитываем доставку
+            order.shipping_weight = cart.get_total_weight()
+            shipping_base = cart.calculate_shipping_cost_base()
+            order.shipping_cost_base = shipping_base
+            order.shipping_cost = shipping_base * order.exchange_rate
+
+            print(f"🔍 SHIPPING: {shipping_base} RUB * {order.exchange_rate} = {order.shipping_cost} {order.currency}")
+
+            # ВАЖНО: original_total в USD (базовой валюте)
+            total_in_rub = Decimal('0')
+            for item in cart:
+                total_in_rub += item["product"].price * item["quantity"]
+            
+            if cart.coupon:
+                discount_amount = total_in_rub * (cart.coupon.discount / Decimal(100))
+                total_in_rub -= discount_amount
+            
+            # Конвертируем в USD (базовая валюта)
+            usd_rate = Decimal('0.012')  # 1 RUB = 0.012 USD
+            order.original_total = total_in_rub * usd_rate
+            
+            order.shipping_method = "standard"
+
             if cart.coupon:
                 order.coupon = cart.coupon
                 order.discount = cart.coupon.discount
+            
+            # ДОБАВЬТЕ ОТЛАДКУ ПЕРЕД СОХРАНЕНИЕМ
+            print(f"🔍 BEFORE SAVE - shipping_cost: {order.shipping_cost}")
+            print(f"🔍 BEFORE SAVE - original_total: {order.original_total}")
+            
             order.save()
 
-            # ОБНОВИТЕ ЭТОТ КОД - конвертируем цены при создании OrderItem
+            # ИСПРАВЛЕНИЕ: Правильная конвертация цен для OrderItem
             for item in cart:
-                # Конвертируем цену из рублей в валюту заказа
-                original_price_rub = Decimal(item["price"])
-                price_in_order_currency = cart.convert_price(original_price_rub)
+                # Получаем оригинальную цену в рублях
+                original_price_rub = item["product"].price
+                # Конвертируем в валюту заказа
+                price_in_currency = original_price_rub * order.exchange_rate
+                
+                print(f"🔍 ITEM PRICE: {item['product'].name} - {original_price_rub} RUB -> {price_in_currency} {order.currency}")
                 
                 OrderItem.objects.create(
                     order=order,
                     product=item["product"],
-                    price=price_in_order_currency,  # Сохраняем конвертированную цену
+                    price=price_in_currency,  # Конвертированная цена
                     quantity=item["quantity"],
                 )
 

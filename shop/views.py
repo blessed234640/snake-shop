@@ -1,20 +1,16 @@
 from cart.forms import CartAddProductForm
+from django.db.models import Q
 from django.shortcuts import get_object_or_404, render
 
 from .models import Category, Product
 from .recommender import Recommender
 
+
 def product_list(request, category_slug=None):
     category = None
     categories = Category.objects.all()
     products = Product.objects.filter(available=True)
-    
-    # 🔴 ОТЛАДКА
-    if products:
-        first_product = products[0]
-        print(f"🔴 VIEW - Product: {first_product}, Price: {first_product.price}")
-        print(f"🔴 VIEW - Language: {request.LANGUAGE_CODE}")
-    
+
     if category_slug:
         language = request.LANGUAGE_CODE
         category = get_object_or_404(
@@ -23,8 +19,7 @@ def product_list(request, category_slug=None):
             translations__slug=category_slug,
         )
         products = products.filter(category=category)
-    
-    # 🔴 ВАЖНО: УБЕДИТЕСЬ ЧТО ЕСТЬ RETURN
+
     return render(
         request,
         "shop/product/list.html",
@@ -34,6 +29,7 @@ def product_list(request, category_slug=None):
             "products": products,
         },
     )
+
 
 def product_detail(request, id, slug):
     language = request.LANGUAGE_CODE
@@ -62,3 +58,30 @@ def product_detail(request, id, slug):
             "recommended_products": recommended_products,
         },
     )
+
+
+def product_search(request):
+    query = request.GET.get('q', '').strip()
+    products = Product.objects.filter(available=True)
+    
+    if query:
+        # Ищем в нескольких вариантах
+        query_variants = [
+            query,           # оригинальный запрос
+            query.lower(),   # нижний регистр
+            query.upper(),   # верхний регистр
+            query.capitalize(), # с заглавной буквы
+        ]
+        
+        # Создаем Q объекты для всех вариантов
+        q_objects = Q()
+        for variant in set(query_variants):  # set для удаления дубликатов
+            q_objects |= Q(translations__name__icontains=variant)
+            q_objects |= Q(translations__description__icontains=variant)
+        
+        products = products.filter(q_objects).distinct()
+    
+    return render(request, 'shop/product/search.html', {
+        'products': products,
+        'query': query
+    })

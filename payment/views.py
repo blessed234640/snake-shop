@@ -33,12 +33,8 @@ def payment_process(request):
         stripe_locale = language_map.get(current_language, "auto")
 
         # Получаем валюту из заказа и конвертируем для Stripe
-        currency_mapping = {
-            'USD': 'usd',
-            'EUR': 'eur', 
-            'RUB': 'rub'
-        }
-        stripe_currency = currency_mapping.get(order.currency, 'usd')
+        currency_mapping = {"USD": "usd", "EUR": "eur", "RUB": "rub"}
+        stripe_currency = currency_mapping.get(order.currency, "usd")
 
         # Базовые данные сессии
         session_data = {
@@ -55,7 +51,7 @@ def payment_process(request):
         # Добавляем товары заказа с правильной валютой
         for item in order.items.all():
             # Конвертируем цену в минимальные единицы валюты (центы/копейки)
-            if stripe_currency == 'rub':
+            if stripe_currency == "rub":
                 unit_amount = int(item.price * 100)  # рубли в копейки
             else:
                 unit_amount = int(item.price * 100)  # доллары/евро в центы
@@ -74,22 +70,53 @@ def payment_process(request):
                     "quantity": item.quantity,
                 }
             )
+        # ДОБАВЬТЕ СТОИМОСТЬ ДОСТАВКИ КАК ОТДЕЛЬНЫЙ ЭЛЕМЕНТ
+        if order.shipping_cost > 0:
+            if stripe_currency == "rub":
+                shipping_amount = int(order.shipping_cost * 100)
+            else:
+                shipping_amount = int(order.shipping_cost * 100)
+
+            # Локализованное название доставки
+            shipping_names = {
+                'en': 'Shipping',
+                'ru': 'Доставка',
+                'es': 'Envío'
+            }
+            current_language = translation.get_language()
+            shipping_name = shipping_names.get(current_language, 'Shipping')
+
+            session_data["line_items"].append({
+                "price_data": {
+                    "unit_amount": shipping_amount,
+                    "currency": stripe_currency,
+                    "product_data": {
+                        "name": f"{shipping_name} ({order.shipping_method})",
+                        "description": f"{order.shipping_weight}g",  # Вес одинаков для всех языков
+                    },
+                },
+                "quantity": 1,
+            })
 
         # Обработка купонов для Stripe
         if order.coupon:
             try:
-                # Создаем купон в Stripe с правильной валютой
+                # ВАЖНО: Используем стандартный купон Stripe (не отрицательные суммы)
                 stripe_coupon = stripe.Coupon.create(
                     name=order.coupon.code,
                     percent_off=order.discount,
                     duration="once",
-                    currency=stripe_currency,  # Используем валюту из заказа
+                    currency=stripe_currency,
                 )
                 session_data["discounts"] = [{"coupon": stripe_coupon.id}]
+                
+                print(f"🔍 STRIPE COUPON: {order.discount}% off")
+                
             except stripe.error.StripeError as e:
                 # Логируем ошибку, но продолжаем без купона
                 print(f"Stripe coupon error: {e}")
-                # Можно добавить сообщение для пользователя
+                # Убираем купон из сессии если ошибка
+                session_data.pop("discounts", None)
 
         # Настройки адреса доставки (если нужно)
         session_data["shipping_address_collection"] = {

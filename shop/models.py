@@ -38,6 +38,13 @@ class Product(TranslatableModel):
     )
     image = models.ImageField(upload_to="products/%Y/%m/%d", blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
+    weight = models.DecimalField(
+        max_digits=8, 
+        decimal_places=2, 
+        default=0,
+        verbose_name="Вес (г)",
+        help_text="Вес товара в граммах"
+    )
     available = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

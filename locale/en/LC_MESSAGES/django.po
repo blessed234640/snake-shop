@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: MyShop 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-19 21:26+0500\n"
-"PO-Revision-Date: 2025-11-24 00:19+0000\n"
+"PO-Revision-Date: 2025-11-28 21:28+0000\n"
 "Last-Translator:   <arturazimov200577@gmail.com>\n"
 "Language-Team: English <en@li.org>\n"
 "Language: en\n"
@@ -300,7 +300,7 @@ msgstr ""
 #: .\shop\templates\shop\product\list.html:41
 #| msgid "Premium snakes"
 msgid "Premium snake collection"
-msgstr "remium snake collection"
+msgstr "Premium snake collection"
 
 #: .\shop\templates\shop\product\list.html:46
 #, python-format

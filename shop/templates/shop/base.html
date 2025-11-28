@@ -8,44 +8,129 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% translate "Snake Shop" %}{% endblock %}</title>
     <link href="{% static 'shop/css/base.css' %}" rel="stylesheet">
+    <style>
+        .header-top {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .search-form {
+            display: flex;
+            margin-right: 20px;
+        }
+        
+        .search-input {
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px 0 0 4px;
+            width: 250px;
+            font-size: 14px;
+        }
+        
+        .search-button {
+            padding: 8px 15px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .search-button:hover {
+            background: #45a049;
+        }
+        
+        .language-cart-group {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .language-form select {
+            padding: 6px 8px;
+            border-radius: 4px;
+            border: 1px solid #333;
+            background: white;
+            color: #333;
+            font-size: 14px;
+            min-width: 80px;
+        }
+        
+        .cart-header {
+            white-space: nowrap;
+            color: white;
+        }
+        
+        .cart-header a {
+            color: #ffeb3b;
+            text-decoration: none;
+        }
+        
+        .cart-header a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
     <div id="header">
-        <div style="max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+        <div class="header-top">
+            <!-- Логотип -->
             <a href="/" class="logo">{% translate "Snake Paradise" %}</a>
 
-            <!-- ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКА - ДОБАВЬТЕ ЭТОТ БЛОК -->
-            <div style="margin-right: 20px;">
-                <form action="{% url 'set_language' %}" method="post">
-                    {% csrf_token %}
-                    <input name="next" type="hidden" id="next-input" />
-                    <select name="language" onchange="this.form.submit()" style="padding: 5px; border-radius: 4px; border: 1px solid #ccc;">
-                        {% get_current_language as LANGUAGE_CODE %}
-                        {% get_available_languages as LANGUAGES %}
-                        {% for lang in LANGUAGES %}
-                            <option value="{{ lang.0 }}" {% if lang.0 == LANGUAGE_CODE %}selected{% endif %}>
-                                {{ lang.1 }}
-                            </option>
-                        {% endfor %}
-                    </select>
+            <!-- Правая часть с поиском, языком и корзиной -->
+            <div class="header-actions">
+                <!-- ФОРМА ПОИСКА -->
+                <form class="search-form" action="{% url 'shop:product_search' %}" method="get">
+                    <input type="text" name="q" class="search-input" placeholder="{% translate 'Search products...' %}" value="{{ request.GET.q }}">
+                    <button type="submit" class="search-button">{% translate "Search" %}</button>
                 </form>
-            </div>
-            <!-- Корзина перемещена в правый верхний угол -->
-            <div class="cart-header">
-                {% with total_items=cart|length %}
-                    {% if total_items > 0 %}
-                        🛒 {% translate "Your cart" %}:
-                        <a href="{% url 'cart:cart_detail' %}">
-                            {% blocktranslate with total=cart.get_total_price|currency count items=total_items %}
-                                {{ items }} item, {{ total }}
-                            {% plural %}
-                                {{ items }} items, {{ total }}
-                            {% endblocktranslate %}
-                        </a>
-                    {% elif not order %}
-                        🛒 {% translate "Your cart is empty" %}
-                    {% endif %}
-                {% endwith %}
+
+                <!-- ГРУППА ЯЗЫК И КОРЗИНА -->
+                <div class="language-cart-group">
+                    <!-- ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКА -->
+                    <form class="language-form" action="{% url 'set_language' %}" method="post">
+                        {% csrf_token %}
+                        <input name="next" type="hidden" value="{{ request.get_full_path }}">
+                        <select name="language" onchange="this.form.submit()">
+                            {% get_current_language as LANGUAGE_CODE %}
+                            {% get_available_languages as LANGUAGES %}
+                            {% for lang in LANGUAGES %}
+                                <option value="{{ lang.0 }}" {% if lang.0 == LANGUAGE_CODE %}selected{% endif %}>
+                                    {{ lang.1 }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </form>
+
+                    <!-- КОРЗИНА -->
+                    <div class="cart-header">
+                        {% with total_items=cart|length %}
+                            {% if total_items > 0 %}
+                                🛒 {% translate "Your cart" %}:
+                                <a href="{% url 'cart:cart_detail' %}">
+                                    {% blocktranslate with total=cart.get_total_price|currency count items=total_items %}
+                                        {{ items }} item, {{ total }}
+                                    {% plural %}
+                                        {{ items }} items, {{ total }}
+                                    {% endblocktranslate %}
+                                </a>
+                            {% elif not order %}
+                                🛒 {% translate "Your cart is empty" %}
+                            {% endif %}
+                        {% endwith %}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -68,5 +153,15 @@
             </p>
         </div>
     </footer>
+
+    <script>
+        // Устанавливаем правильный next для формы языка
+        document.addEventListener('DOMContentLoaded', function() {
+            const nextInput = document.querySelector('input[name="next"]');
+            if (nextInput) {
+                nextInput.value = window.location.pathname + window.location.search;
+            }
+        });
+    </script>
 </body>
 </html>

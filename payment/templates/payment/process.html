@@ -4,64 +4,113 @@
 {% block title %}{% translate "Pay your order" %}{% endblock %}
 
 {% block content %}
-  <h1>{% translate "Order summary" %}</h1>
-  <table class="cart">
-    <thead>
-      <tr>
-        <th>{% translate "Image" %}</th>
-        <th>{% translate "Product" %}</th>
-        <th>{% translate "Price" %}</th>
-        <th>{% translate "Quantity" %}</th>
-        <th>{% translate "Total" %}</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for item in order.items.all %}
-        <tr class="row{% cycle "1" "2" %}">
-          <td>
-            <img src="{% if item.product.image %}{{ item.product.image.url }}
-            {% else %}{% static "img/no_image.png" %}{% endif %}">
-          </td>
-          <td>{{ item.product.name }}</td>
-          <td class="num">{{ item.price|currency }}</td>
-          <td class="num">{{ item.quantity }}</td>
-          <td class="num">{{ item.get_cost|currency }}</td>
+  <div class="payment-container">
+    <h1>{% translate "Order summary" %}</h1>
+
+    <table class="cart centered-table">
+      <thead>
+        <tr>
+          <th>{% translate "Image" %}</th>
+          <th>{% translate "Product" %}</th>
+          <th>{% translate "Price" %}</th>
+          <th>{% translate "Quantity" %}</th>
+          <th>{% translate "Total" %}</th>
         </tr>
-      {% endfor %}
-      
-      {% if order.coupon %}
-        <tr class="subtotal">
-          <td>{% translate "Subtotal" %}</td>
+      </thead>
+      <tbody>
+        {% for item in order.items.all %}
+          <tr class="row{% cycle "1" "2" %}">
+            <td>
+              <img src="{% if item.product.image %}{{ item.product.image.url }}
+              {% else %}{% static "img/no_image.png" %}{% endif %}">
+            </td>
+            <td>{{ item.product.name }}</td>
+            <td class="num">{{ item.price|order_currency }}</td>
+            <td class="num">{{ item.quantity }}</td>
+            <td class="num">{{ item.get_cost|order_currency }}</td>
+          </tr>
+        {% endfor %}
+
+        {% if order.coupon %}
+          <tr class="subtotal">
+            <td>{% translate "Subtotal" %}</td>
+            <td colspan="3"></td>
+            <td class="num">
+              {{ order.get_total_cost_before_discount|order_currency }}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              {% blocktranslate with code=order.coupon.code discount=order.discount %}
+                "{{ code }}" coupon ({{ discount }}% off)
+              {% endblocktranslate %}
+            </td>
+            <td colspan="3"></td>
+            <td class="num neg">
+              - {{ order.get_discount|order_currency }}
+            </td>
+          </tr>
+        {% endif %}
+        <tr class="shipping">
+          <td>{% translate "Shipping" %}</td>
           <td colspan="3"></td>
           <td class="num">
-            {{ order.get_total_cost_before_discount|currency }}
+              {{ order.shipping_cost|order_currency }}
+              <br>
+              <small>({{ order.shipping_weight }}g)</small>
           </td>
         </tr>
-        <tr>
-          <td>
-            {% blocktranslate with code=order.coupon.code discount=order.discount %}
-              "{{ code }}" coupon ({{ discount }}% off)
-            {% endblocktranslate %}
-          </td>
+        <tr class="total">
+          <td>{% translate "Total" %}</td>
           <td colspan="3"></td>
-          <td class="num neg">
-            - {{ order.get_discount|currency }}
+          <td class="num">
+              {{ order.get_total_cost|order_currency }}
           </td>
         </tr>
-      {% endif %}
-      
-      <tr class="total">
-        <td>{% translate "Total" %}</td>
-        <td colspan="3"></td>
-        <td class="num">
-          {{ order.get_total_cost|currency }}
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  
-  <form action="{% url "payment:process" %}" method="post">
-    <input type="submit" value='{% translate "Pay now" %}'>
-    {% csrf_token %}
-  </form>
+      </tbody>
+    </table>
+
+    <div class="payment-button-wrapper">
+      <form action="{% url "payment:process" %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value='{% translate "Pay now" %}' class="payment-btn">
+      </form>
+    </div>
+  </div>
+
+  <style>
+    .payment-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .centered-table {
+      margin: 0 auto 30px auto;
+      width: 95%;
+    }
+
+    .payment-button-wrapper {
+      text-align: center;
+    }
+
+    .payment-btn {
+      background: #28a745;
+      color: white;
+      border: none;
+      padding: 12px 35px;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .payment-btn:hover {
+      background: #218838;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+  </style>
 {% endblock %}

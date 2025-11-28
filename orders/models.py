@@ -24,10 +24,35 @@ class Order(models.Model):
     discount = models.IntegerField(
         default=0, validators=[MinValueValidator(0), MaxValueValidator(100)]
     )
-# ДОБАВИТЬ ЭТИ ПОЛЯ ДЛЯ МУЛЬТИВАЛЮТНОСТИ
+    # ДОБАВИТЬ ЭТИ ПОЛЯ ДЛЯ МУЛЬТИВАЛЮТНОСТИ
     currency = models.CharField(max_length=3, default='USD')
     exchange_rate = models.DecimalField(max_digits=10, decimal_places=4, default=1.0)
     original_total = models.DecimalField(max_digits=10, decimal_places=2, default=0)  # В базовой валюте (USD)
+    
+    # ДОБАВЬТЕ ЭТИ ПОЛЯ ДЛЯ ДОСТАВКИ
+    shipping_weight = models.DecimalField(
+        max_digits=10, 
+        decimal_places=2, 
+        default=0,
+        verbose_name=_("Total weight (g)")
+    )
+    shipping_cost = models.DecimalField(
+        max_digits=10, 
+        decimal_places=2, 
+        default=0,
+        verbose_name=_("Shipping cost")
+    )
+    shipping_cost_base = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0,
+        verbose_name=_("Shipping cost in base currency (RUB)")
+    )
+    shipping_method = models.CharField(
+        max_length=50,
+        blank=True,
+        verbose_name=_("Shipping method")
+    )
 
     class Meta:
         ordering = ["-created"]
@@ -37,7 +62,34 @@ class Order(models.Model):
 
     def __str__(self):
         return f"Order {self.id}"
+    
+    def calculate_total_weight(self):
+        """Рассчитывает общий вес заказа"""
+        total_weight = sum(
+            item.product.weight * item.quantity for item in self.items.all()
+        )
+        return total_weight
 
+    def calculate_shipping_cost_base(self):
+        """Рассчитывает стоимость доставки в базовой валюте (рублях)"""
+        total_weight = self.calculate_total_weight()
+        
+        # Тарифы доставки в РУБЛЯХ (базовая валюта)
+        if total_weight <= 1000:  # до 1 кг
+            return Decimal('500.00')  # 500 руб
+        elif total_weight <= 5000:  # до 5 кг
+            return Decimal('800.00')  # 800 руб
+        elif total_weight <= 10000:  # до 10 кг
+            return Decimal('1200.00')  # 1200 руб
+        else:  # свыше 10 кг
+            return Decimal('1200.00') + (total_weight - 10000) / 1000 * Decimal('100.00')
+
+    def get_shipping_cost_in_order_currency(self):
+        """Возвращает стоимость доставки в валюте заказа"""
+        shipping_base = self.shipping_cost_base
+        # Конвертируем из рублей в валюту заказа
+        return shipping_base * self.exchange_rate
+    
     def get_total_cost_before_discount(self):
         return sum(item.get_cost() for item in self.items.all())
 
@@ -48,6 +100,13 @@ class Order(models.Model):
         return Decimal(0)
 
     def get_total_cost(self):
+        """ОБНОВИТЕ ЭТОТ МЕТОД - должен включать доставку!"""
+        total_cost = self.get_total_cost_before_discount()
+        total_with_discount = total_cost - self.get_discount()
+        return total_with_discount + self.shipping_cost
+    
+    def get_items_total(self):
+        """Стоимость только товаров (без доставки)"""
         total_cost = self.get_total_cost_before_discount()
         return total_cost - self.get_discount()
     
